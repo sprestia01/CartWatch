@@ -10,11 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-:root {
+:root{
   --bg:#f4f8f6;--white:#fff;--surf:#eaf2ed;--bord:#cfe4d8;
   --green:#18956a;--glt:#e3f4ec;--gmd:#9ed4b8;
   --amber:#c97c10;--alt:#fdf2dc;
   --red:#d03030;--rlt:#fde8e8;
+  --blue:#1a6cb0;--blt:#e3f0fb;
   --ink:#0d201a;--ink2:#3a5c4e;--ink3:#86a899;
   --st:env(safe-area-inset-top);--sb:env(safe-area-inset-bottom);
   --nav:62px;--r:14px;
@@ -44,9 +45,6 @@ nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav)+var(--sb));bac
 .btn-g:active{opacity:.82}
 .btn-o{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:var(--r);border:1px solid var(--bord);background:var(--white);color:var(--ink2);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer}
 .btn-o:active{background:var(--surf)}
-.pill{border-radius:99px;padding:7px 14px;border:1.5px solid;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
-.pill.g{background:var(--glt);border-color:var(--gmd);color:var(--green)}
-.pill.r{background:var(--rlt);border-color:#f0a0a0;color:var(--red)}
 
 /* INPUTS */
 .field{width:100%;background:var(--surf);border:1px solid var(--bord);border-radius:10px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink);outline:none;-webkit-appearance:none}
@@ -57,10 +55,8 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 
 /* CHIPS */
 .chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:700}
-.chip.g{background:var(--glt);color:var(--green)}
-.chip.a{background:var(--alt);color:var(--amber)}
-.chip.r{background:var(--rlt);color:var(--red)}
-.chip.d{background:var(--surf);color:var(--ink2)}
+.chip.g{background:var(--glt);color:var(--green)}.chip.a{background:var(--alt);color:var(--amber)}
+.chip.r{background:var(--rlt);color:var(--red)}.chip.d{background:var(--surf);color:var(--ink2)}
 
 /* PROGRESS */
 .bt{height:6px;background:var(--surf);border-radius:99px;overflow:hidden}
@@ -86,35 +82,25 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 
 /* EMPTY */
 .empty{text-align:center;padding:40px 24px}
-.ei{font-size:40px;margin-bottom:10px}
-.et{font-size:15px;font-weight:700;color:var(--ink2)}
-.es{font-size:13px;color:var(--ink3);margin-top:4px;line-height:1.5}
+.ei{font-size:40px;margin-bottom:10px}.et{font-size:15px;font-weight:700;color:var(--ink2)}.es{font-size:13px;color:var(--ink3);margin-top:4px;line-height:1.5}
 
-/* HOME */
-.home-hdr{padding:14px 18px 0;display:flex;justify-content:space-between;align-items:center}
-.hero-lbl{font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px}
-
-/* PLANNED vs ACTUAL HERO */
-.pva{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;padding:18px 20px 10px;gap:8px}
-.pva-num{font-family:'DM Mono',monospace;font-size:32px;font-weight:500;letter-spacing:-.5px;line-height:1}
-.pva-lbl{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px}
-.pva-div{font-size:22px;color:var(--ink3);font-weight:300}
-.pva-delta{font-size:13px;font-weight:700;margin-top:4px}
-
-/* CAT ROWS — now show planned vs actual */
+/* HOME TRIP DASHBOARD */
+.hero-total{text-align:center;padding:20px 20px 10px}
+.hero-lbl{font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px}
+.hero-num{font-family:'DM Mono',monospace;font-size:54px;font-weight:500;letter-spacing:-1px;line-height:1}
+.hero-sub{font-size:14px;color:var(--ink3);margin-top:6px}
 .crow{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bord)}
 .crow:last-child{border-bottom:none}
 .cico{font-size:20px;width:28px;text-align:center;flex-shrink:0}
 .cmid{flex:1;min-width:0}
 .cname{font-size:14px;font-weight:600;margin-bottom:4px}
+.cnote{font-size:11px;color:var(--ink3);margin-top:2px}
 .cright{text-align:right;flex-shrink:0}
-.cact{font-family:'DM Mono',monospace;font-size:14px;font-weight:500}
-.cplan{font-size:11px;color:var(--ink3);margin-top:2px}
-
-/* LOCKED BADGE */
+.cval{font-family:'DM Mono',monospace;font-size:15px;font-weight:500}
+.cbudg{font-size:11px;color:var(--ink3);margin-top:2px}
 .lock-badge{display:inline-flex;align-items:center;gap:4px;background:var(--surf);border:1px solid var(--bord);border-radius:99px;padding:3px 9px;font-size:11px;font-weight:700;color:var(--ink2)}
 
-/* LIST ITEMS */
+/* LIST */
 .li{display:flex;align-items:center;gap:11px;padding:12px 16px;background:var(--white);border-bottom:1px solid var(--bord)}
 .li:last-child{border-bottom:none}
 .liwrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--bord);margin:0 16px}
@@ -125,34 +111,71 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 .liname{font-size:15px;font-weight:600}
 .liname.done{color:var(--ink3);text-decoration:line-through}
 .licat{font-size:12px;color:var(--ink3);margin-top:2px}
-.liprice{font-family:'DM Mono',monospace;font-size:13px;color:var(--ink2);flex-shrink:0;text-align:right}
-.liact{font-size:12px;font-weight:700;margin-top:2px}
+.liprice{font-family:'DM Mono',monospace;font-size:14px;font-weight:600;color:var(--green);flex-shrink:0}
 .lidel{width:26px;height:26px;border-radius:50%;background:var(--rlt);border:none;color:var(--red);font-size:16px;line-height:1;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 
-/* PRICE CONFIRM SHEET — special styling */
-.pconf-planned{display:flex;align-items:center;justify-content:space-between;background:var(--surf);border-radius:10px;padding:12px 14px;margin-bottom:14px}
-.pconf-arrow{font-size:22px;color:var(--ink3);margin:0 8px}
-.pconf-delta{text-align:center;padding:10px;border-radius:10px;margin-bottom:14px;font-size:14px;font-weight:700}
+/* PRICE CONFIRM — big & clear */
+.pconf-item{background:var(--surf);border-radius:12px;padding:14px;margin-bottom:16px;text-align:center}
+.pconf-name{font-size:18px;font-weight:800;margin-bottom:4px}
+.pconf-cat{font-size:13px;color:var(--ink3)}
+.pconf-hist{font-size:12px;color:var(--blue);font-weight:700;margin-top:6px}
+.pconf-budget{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--surf);border-radius:10px;margin-bottom:14px;font-size:13px}
 
-/* BUDGET ROWS */
-.brow{padding:13px 0;border-bottom:1px solid var(--bord)}
-.brow:last-child{border-bottom:none}
+/* BUDGET */
+.brow{padding:13px 0;border-bottom:1px solid var(--bord)}.brow:last-child{border-bottom:none}
 .btop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .blbl{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:600}
 .bctrl{display:flex;align-items:center;gap:8px}
-.bbtn{width:28px;height:28px;border-radius:50%;background:var(--surf);border:1px solid var(--bord);color:var(--ink);font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+.bbtn{width:28px;height:28px;border-radius:50%;background:var(--surf);border:1px solid var(--bord);color:var(--ink);font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .bbtn:active{background:var(--glt);border-color:var(--green);color:var(--green)}
 .bval{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--green);min-width:48px;text-align:center}
 .bsl{width:100%;-webkit-appearance:none;height:4px;background:var(--bord);border-radius:99px;outline:none}
 .bsl::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--green);cursor:pointer;box-shadow:0 0 0 3px var(--glt)}
 .blocked{opacity:.5;pointer-events:none}
 
-/* HISTORY */
-.tcard{background:var(--white);border:1px solid var(--bord);border-radius:var(--r);margin:8px 16px 0;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+/* CHECKOUT */
 .co-line{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bord);font-size:14px}
 .co-line:last-of-type{border-bottom:none}
 .co-total{display:flex;justify-content:space-between;padding:13px 0 8px;font-size:18px;font-weight:800;border-top:2px solid var(--bord)}
 .co-save{text-align:center;padding:11px;border-radius:10px;margin-bottom:12px;font-size:14px;font-weight:700}
+
+/* SCORE RING */
+.score-ring{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.score-ring svg{transform:rotate(-90deg)}
+.score-letter{position:absolute;font-weight:800}
+
+/* BADGES */
+.badge{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;background:var(--white);border:1px solid var(--bord);border-radius:12px;min-width:72px}
+.badge.earned{border-color:var(--amber);background:var(--alt)}
+.badge.locked{opacity:.35}
+.badge-ico{font-size:28px}.badge-name{font-size:10px;font-weight:700;text-align:center;color:var(--ink2)}
+
+/* STREAK */
+.streak-banner{margin:10px 16px 0;background:linear-gradient(135deg,#1a6cb0,#18956a);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px;color:#fff}
+
+/* ONBOARDING */
+.ob-overlay{position:fixed;inset:0;background:rgba(13,32,26,.6);z-index:1000;display:none;align-items:flex-end}
+.ob-overlay.open{display:flex}
+.ob-sheet{background:var(--white);border-radius:22px 22px 0 0;width:100%;padding:20px 24px calc(var(--sb)+32px)}
+.ob-step{display:none}.ob-step.on{display:block}
+.ob-ico{font-size:52px;text-align:center;margin-bottom:12px}
+.ob-title{font-size:22px;font-weight:800;text-align:center;margin-bottom:8px}
+.ob-body{font-size:15px;color:var(--ink2);text-align:center;line-height:1.6;margin-bottom:24px}
+.ob-dots{display:flex;justify-content:center;gap:6px;margin-bottom:20px}
+.ob-dot{width:8px;height:8px;border-radius:50%;background:var(--bord);transition:all .2s}
+.ob-dot.on{background:var(--green);width:20px;border-radius:99px}
+
+/* TRIP CARDS */
+.tcard{background:var(--white);border:1px solid var(--bord);border-radius:var(--r);margin:8px 16px 0;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+
+/* PRICE MEMORY */
+.pm-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bord)}
+.pm-row:last-child{border-bottom:none}
+
+/* CATEGORY TABS */
+.cat-tab{padding:5px 12px;border-radius:99px;border:1.5px solid var(--bord);background:var(--white);color:var(--ink3);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .15s}
+.cat-tab.on{background:var(--glt);border-color:var(--gmd);color:var(--green)}
+#cat-tabs::-webkit-scrollbar{display:none}
 </style>
 </head>
 <body>
@@ -161,68 +184,65 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 
   <!-- ══ HOME ══ -->
   <div class="scr on" id="s-home">
-
-    <!-- LANDING (no active trip) -->
+    <!-- LANDING -->
     <div id="v-landing">
-      <div style="padding:36px 24px 0;text-align:center">
-        <div style="font-size:48px;margin-bottom:12px">🛒</div>
+      <div style="padding:28px 24px 0;text-align:center">
+        <div style="font-size:48px;margin-bottom:10px">🛒</div>
         <div style="font-size:30px;font-weight:800;letter-spacing:-.5px">CartWatch</div>
         <div style="font-size:14px;color:var(--ink3);margin-top:6px">Stay on budget, every trip</div>
       </div>
-      <div style="padding:28px 24px 0;display:flex;flex-direction:column;gap:12px">
+      <div id="streak-banner" style="display:none" class="streak-banner">
+        <div style="font-size:32px">🔥</div>
+        <div><div style="font-weight:800;font-size:16px" id="streak-text"></div><div style="font-size:13px;opacity:.85" id="streak-sub"></div></div>
+      </div>
+      <div id="last-score-card" style="display:none;margin:10px 16px 0;background:var(--white);border:1px solid var(--bord);border-radius:var(--r);padding:14px 16px">
+        <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px">Last Trip</div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <div class="score-ring" style="width:72px;height:72px">
+            <svg viewBox="0 0 80 80" width="72" height="72">
+              <circle cx="40" cy="40" r="34" fill="none" stroke="#cfe4d8" stroke-width="8"/>
+              <circle id="score-arc" cx="40" cy="40" r="34" fill="none" stroke="#18956a" stroke-width="8" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+            </svg>
+            <div class="score-letter" id="score-letter" style="font-size:22px">—</div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:700" id="last-trip-store"></div>
+            <div style="font-size:12px;color:var(--ink3);margin-top:2px" id="last-trip-date"></div>
+            <div style="font-size:13px;font-weight:700;margin-top:5px" id="last-trip-stat"></div>
+          </div>
+        </div>
+      </div>
+      <div id="tip-card" style="display:none;margin:10px 16px 0;background:var(--blt);border:1px solid #a8cce8;border-radius:var(--r);padding:13px 15px">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px">💡 Tip</div>
+        <div id="tip-text" style="font-size:14px;color:var(--ink2);line-height:1.5"></div>
+      </div>
+      <div style="padding:16px 24px 0;display:flex;flex-direction:column;gap:10px">
         <button class="btn-g" id="btn-new-trip" style="font-size:17px;padding:18px">🛒 &nbsp;New Trip</button>
         <button class="btn-o" id="btn-go-budget" style="font-size:17px;padding:17px">🎯 &nbsp;Budget</button>
         <button class="btn-o" id="btn-history" style="font-size:17px;padding:17px">📊 &nbsp;View History</button>
       </div>
     </div>
 
-    <!-- ACTIVE TRIP DASHBOARD -->
+    <!-- ACTIVE TRIP -->
     <div id="v-trip" style="display:none">
-      <div class="home-hdr">
+      <div style="padding:14px 18px 0;display:flex;justify-content:space-between;align-items:center">
         <div>
           <div class="ptitle">CartWatch</div>
           <div id="trip-store-lbl" style="font-size:13px;color:var(--ink3);margin-top:2px"></div>
         </div>
-        <button class="pill r" id="end-trip-btn">End Trip</button>
+        <span class="lock-badge">🔒 Budget locked</span>
       </div>
-
-      <!-- Planned vs Actual hero -->
-      <div class="pva">
-        <div>
-          <div class="pva-lbl" style="color:var(--ink3)">Planned</div>
-          <div class="pva-num" id="hero-planned" style="color:var(--ink2)">$0.00</div>
-          <div class="pva-delta" id="hero-planned-lbl" style="color:var(--ink3)">budget</div>
-        </div>
-        <div class="pva-div">→</div>
-        <div>
-          <div class="pva-lbl" style="color:var(--green)">Actual</div>
-          <div class="pva-num" id="hero-actual" style="color:var(--ink)">$0.00</div>
-          <div class="pva-delta" id="hero-delta">—</div>
-        </div>
+      <div class="hero-total">
+        <div class="hero-lbl">Cart Total</div>
+        <div class="hero-num" id="hero-actual">$0.00</div>
+        <div class="hero-sub" id="hero-sub">of $0.00 budget</div>
       </div>
-
-      <!-- Master progress bar -->
-      <div style="margin:0 16px 10px">
-        <div class="bt"><div class="bf" id="master-bar" style="width:0%;background:var(--green)"></div></div>
-      </div>
-
-      <!-- Status chips -->
+      <div style="margin:0 16px 10px"><div class="bt"><div class="bf" id="master-bar" style="width:0%;background:var(--green)"></div></div></div>
       <div id="home-chips" style="padding:0 16px 10px;display:flex;gap:6px;flex-wrap:wrap"></div>
-
-      <!-- Budget locked notice -->
-      <div style="padding:0 16px 10px;display:flex;align-items:center;gap:8px">
-        <span class="lock-badge">🔒 Budget locked at trip start</span>
-      </div>
-
-      <!-- Category breakdown -->
       <div class="card"><div id="home-cats"></div></div>
       <div class="gap"></div>
-
-      <!-- Action buttons -->
       <div style="padding:0 16px;display:flex;flex-direction:column;gap:10px">
-        <button class="btn-g" id="checkout-btn" style="display:none">
-          🛒 Checkout &mdash; <span id="co-label">$0.00</span>
-        </button>
+        <button class="btn-g" id="checkout-btn">🛒 Checkout &mdash; <span id="co-label">$0.00</span></button>
         <button class="btn-o" id="cart-add-btn">+ Add Item to Cart</button>
       </div>
       <div class="gap"></div>
@@ -235,17 +255,17 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
       <div class="ptitle">Grocery List</div>
       <button id="list-add-btn" style="width:32px;height:32px;border-radius:50%;background:var(--green);border:none;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center">+</button>
     </div>
-    <!-- Budget snapshot -->
+    <!-- Item count / category summary -->
     <div id="list-snap" style="margin:0 16px 10px"></div>
-    <!-- To buy -->
+    <!-- Reuse last trip -->
+    <div id="reuse-bar" style="display:none;margin:0 16px 10px"></div>
     <div style="padding:0 16px 6px"><span class="slbl">To Buy</span></div>
     <div id="list-pending" class="liwrap"></div>
     <div id="list-empty" class="empty" style="display:none;padding:24px">
       <div class="ei">📋</div><div class="et">List is empty</div>
-      <div class="es">Tap + to add items before you shop</div>
+      <div class="es">Tap + to add what you need to buy. No prices needed — you'll enter them in store.</div>
     </div>
     <div class="gap"></div>
-    <!-- In cart -->
     <div id="done-section" style="display:none">
       <div style="padding:0 16px 6px;display:flex;justify-content:space-between;align-items:center">
         <span class="slbl">In Cart (<span id="done-ct">0</span>)</span>
@@ -265,23 +285,42 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         <div style="font-size:11px;color:var(--ink3)">per trip</div>
       </div>
     </div>
-    <div id="bud-locked-notice" style="display:none;margin:0 16px 10px;background:var(--alt);border:1px solid #f0c060;border-radius:10px;padding:10px 14px;font-size:13px;color:var(--amber);font-weight:600">
-      🔒 Budget is locked during an active trip. End the trip to make changes.
-    </div>
+    <div id="bud-locked-notice" style="display:none;margin:0 16px 10px;background:var(--alt);border:1px solid #f0c060;border-radius:10px;padding:10px 14px;font-size:13px;color:var(--amber);font-weight:600">🔒 Budget is locked during an active trip</div>
     <div class="card" id="bud-rows"></div>
     <div class="gap"></div>
   </div>
 
-  <!-- ══ HISTORY ══ -->
+  <!-- ══ STATS ══ -->
   <div class="scr" id="s-history">
-    <div style="padding:14px 18px 10px">
-      <div class="ptitle">History</div>
-      <div style="font-size:13px;color:var(--ink3);margin-top:2px">Spending over time</div>
+    <div style="padding:14px 18px 4px;display:flex;justify-content:space-between;align-items:center">
+      <div class="ptitle">Stats</div>
+      <div id="hist-ct" style="font-size:12px;color:var(--ink3)"></div>
+    </div>
+    <div id="badges-section" style="display:none">
+      <div style="padding:8px 16px 6px"><span class="slbl">Achievements</span></div>
+      <div id="badges-row" style="display:flex;gap:10px;padding:0 16px 4px;overflow-x:auto"></div>
+      <div class="gap"></div>
     </div>
     <div id="hist-charts" style="display:none">
       <div style="background:var(--white);border:1px solid var(--bord);border-radius:var(--r);margin:0 16px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)">
-        <div class="slbl" style="display:block;margin-bottom:12px">Monthly Spend</div>
+        <!-- Header row -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span class="slbl" id="monthly-chart-title">Monthly Spend</span>
+          <button id="drill-back-btn" style="display:none;font-size:12px;font-weight:700;color:var(--blue);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif">← All Categories</button>
+        </div>
+        <!-- Category filter tabs (scrollable) -->
+        <div id="cat-tabs" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:4px">
+          <button class="cat-tab on" data-cat="all" style="flex-shrink:0">All</button>
+        </div>
+        <!-- Chart -->
         <div style="position:relative;height:180px"><canvas id="chart-monthly"></canvas></div>
+        <!-- Legend -->
+        <div style="display:flex;align-items:center;gap:14px;margin-top:10px;justify-content:center;flex-wrap:wrap" id="monthly-legend">
+          <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink3)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(24,149,106,0.25);border:1.5px solid #18956a"></span>Actual</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink3)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(134,168,153,0.15);border:1.5px solid rgba(134,168,153,0.6)"></span>Budget</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--red)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(208,48,48,0.25);border:1.5px solid #d03030"></span>Over</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--amber)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(201,124,16,0.25);border:1.5px solid #c97c10"></span>Near</span>
+        </div>
       </div>
       <div class="gap"></div>
       <div style="background:var(--white);border:1px solid var(--bord);border-radius:var(--r);margin:0 16px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)">
@@ -292,29 +331,18 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         </div>
       </div>
       <div class="gap"></div>
-      <div style="padding:0 18px 6px;display:flex;justify-content:space-between;align-items:center">
-        <span class="slbl">Recent Trips</span>
-        <span id="hist-ct" style="font-size:12px;color:var(--ink3)"></span>
+      <div id="price-memory-section" style="display:none;background:var(--white);border:1px solid var(--bord);border-radius:var(--r);margin:0 16px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+        <div class="slbl" style="display:block;margin-bottom:10px">Price Trends</div>
+        <div id="price-memory-list"></div>
       </div>
+      <div id="pm-gap" class="gap" style="display:none"></div>
+      <div style="padding:0 18px 6px"><span class="slbl">Recent Trips</span></div>
     </div>
     <div id="hist-list"></div>
     <div id="hist-empty" class="empty" style="display:none">
-      <div class="ei">🛒</div><div class="et">No trips yet</div>
-      <div class="es">Complete a checkout to see history</div>
+      <div class="ei">🛒</div><div class="et">No trips yet</div><div class="es">Complete a trip to see your stats</div>
     </div>
     <div class="gap"></div>
-  </div>
-
-  <!-- CONFIRM DIALOG -->
-  <div class="overlay" id="confirm-overlay">
-    <div class="sheet" onclick="event.stopPropagation()">
-      <div class="handle"></div>
-      <div class="shtitle" id="confirm-title">Are you sure?</div>
-      <div id="confirm-body" style="font-size:15px;color:var(--ink2);margin:-10px 0 20px;line-height:1.5"></div>
-      <button class="btn-g" id="confirm-ok-btn" style="background:var(--red)">Confirm</button>
-      <div class="gap-s"></div>
-      <button class="btn-o" id="confirm-cancel-btn">Cancel</button>
-    </div>
   </div>
 
   <!-- NAV -->
@@ -322,11 +350,52 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     <button class="nb on" id="nb-home"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
     <button class="nb" id="nb-list"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>List</button>
     <button class="nb" id="nb-budget"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Budget</button>
-    <button class="nb" id="nb-history"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>History</button>
+    <button class="nb" id="nb-history"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Stats</button>
   </nav>
 </div>
 
-<!-- ══ STORE PICKER SHEET ══ -->
+<!-- ══ ONBOARDING ══ -->
+<div class="ob-overlay" id="ob-overlay">
+  <div class="ob-sheet">
+    <div class="ob-dots" id="ob-dots"></div>
+    <div class="ob-step on" id="ob-0">
+      <div class="ob-ico">🛒</div>
+      <div class="ob-title">Welcome to CartWatch</div>
+      <div class="ob-body">Track exactly what you spend at the grocery store and stay within your budget — every single trip.</div>
+      <button class="btn-g" onclick="obNext()">Let's go →</button>
+    </div>
+    <div class="ob-step" id="ob-1">
+      <div class="ob-ico">📋</div>
+      <div class="ob-title">Build your list first</div>
+      <div class="ob-body">Add what you need to buy before you leave. Just the item name and category — no prices needed yet.</div>
+      <button class="btn-g" onclick="obNext()">Next →</button>
+      <div class="gap-s"></div><button class="btn-o" onclick="obBack()">← Back</button>
+    </div>
+    <div class="ob-step" id="ob-2">
+      <div class="ob-ico">💰</div>
+      <div class="ob-title">Enter prices in store</div>
+      <div class="ob-body">Check items off your list as you put them in the cart. You'll enter the actual price from the shelf — CartWatch tracks your running total against your budget.</div>
+      <button class="btn-g" onclick="obNext()">Next →</button>
+      <div class="gap-s"></div><button class="btn-o" onclick="obBack()">← Back</button>
+    </div>
+    <div class="ob-step" id="ob-3">
+      <div class="ob-ico">🎯</div>
+      <div class="ob-title">Set category budgets</div>
+      <div class="ob-body">We've set starter budgets for Produce, Meat, Dairy and more. Go to Budget to adjust them to match how you actually shop.</div>
+      <button class="btn-g" onclick="obNext()">Next →</button>
+      <div class="gap-s"></div><button class="btn-o" onclick="obBack()">← Back</button>
+    </div>
+    <div class="ob-step" id="ob-4">
+      <div class="ob-ico">🔥</div>
+      <div class="ob-title">Earn streaks &amp; badges</div>
+      <div class="ob-body">Stay under budget to build a streak. CartWatch remembers your prices so it can warn you when items get more expensive over time.</div>
+      <button class="btn-g" onclick="obFinish()">Start shopping!</button>
+      <div class="gap-s"></div><button class="btn-o" onclick="obBack()">← Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STORE PICKER ══ -->
 <div class="overlay" id="store-overlay">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="handle"></div>
@@ -340,7 +409,7 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
   </div>
 </div>
 
-<!-- ══ ADD / EDIT ITEM SHEET ══ -->
+<!-- ══ ADD / EDIT LIST ITEM (name + category only) ══ -->
 <div class="overlay" id="item-overlay">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="handle"></div>
@@ -348,61 +417,55 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     <label class="fl">Item name</label>
     <input class="field" id="f-name" type="text" placeholder="e.g. Organic Apples" autocomplete="off" autocorrect="off" style="margin-bottom:12px">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-      <div><label class="fl">Price ($)</label><input class="field" id="f-price" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0.00"></div>
-      <div><label class="fl">Qty</label><input class="field" id="f-qty" type="number" inputmode="numeric" min="1" placeholder="1"></div>
+      <div>
+        <label class="fl">Category</label>
+        <select class="field" id="f-cat"></select>
+      </div>
+      <div>
+        <label class="fl">Qty</label>
+        <input class="field" id="f-qty" type="number" inputmode="numeric" min="1" placeholder="1">
+      </div>
     </div>
-    <label class="fl">Category</label>
-    <select class="field" id="f-cat" style="margin-bottom:12px"></select>
-    <div id="f-hint" style="display:none;padding:10px 12px;border-radius:8px;background:var(--surf);font-size:13px;margin-bottom:12px"></div>
+    <!-- Price memory hint shown when editing a previously bought item -->
+    <div id="item-hist-hint" style="display:none;background:var(--blt);border:1px solid #a8cce8;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:13px;color:var(--blue);font-weight:600"></div>
     <button class="btn-g" id="item-save-btn">Add to List</button>
     <div class="gap-s"></div>
     <button class="btn-o" id="item-cancel-btn">Cancel</button>
   </div>
 </div>
 
-<!-- ══ PRICE CONFIRM SHEET ══ -->
+<!-- ══ PRICE CONFIRM (big, simple, in-store UX) ══ -->
 <div class="overlay" id="pconf-overlay">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="handle"></div>
-    <div class="shtitle" id="pconf-item-name">Confirm Price</div>
-    <div style="font-size:13px;color:var(--ink3);margin:-12px 0 16px">Confirm the actual price you see in store</div>
-
-    <!-- Planned price display -->
-    <div class="pconf-planned">
-      <div>
-        <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px">Planned</div>
-        <div style="font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--ink2)" id="pconf-planned-price">$0.00</div>
-      </div>
-      <div class="pconf-arrow">→</div>
-      <div style="flex:1">
-        <label class="fl">Actual Price ($)</label>
-        <input class="field" id="pconf-actual-input" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0.00"
-          style="font-size:20px;font-weight:700;color:var(--ink)">
-      </div>
+    <!-- Item info -->
+    <div class="pconf-item">
+      <div class="pconf-name" id="pconf-item-name">Item</div>
+      <div class="pconf-cat" id="pconf-item-cat"></div>
+      <div class="pconf-hist" id="pconf-hist-hint" style="display:none"></div>
     </div>
-
-    <!-- Budget remaining for category -->
-    <div id="pconf-budget-row" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--surf);border-radius:10px;margin-bottom:14px;font-size:13px">
+    <!-- Big price input -->
+    <label class="fl" style="text-align:center;margin-bottom:8px">What's the price on the shelf?</label>
+    <input class="field" id="pconf-price" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0.00"
+      style="font-size:32px;font-weight:800;text-align:center;padding:16px;margin-bottom:14px;color:var(--green)">
+    <!-- Budget remaining -->
+    <div class="pconf-budget">
       <span id="pconf-cat-label" style="color:var(--ink2)"></span>
       <span id="pconf-cat-remaining" style="font-family:'DM Mono',monospace;font-weight:700"></span>
     </div>
-
-    <!-- Delta indicator -->
-    <div class="pconf-delta" id="pconf-delta" style="display:none"></div>
-
     <button class="btn-g" id="pconf-add-btn">✓ Add to Cart</button>
     <div class="gap-s"></div>
     <button class="btn-o" id="pconf-cancel-btn">Cancel</button>
   </div>
 </div>
 
-<!-- ══ CHECKOUT SHEET ══ -->
+<!-- ══ CHECKOUT ══ -->
 <div class="overlay" id="co-overlay">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="handle"></div>
-    <div class="shtitle">Checkout</div>
+    <div class="shtitle" id="co-title">Checkout</div>
     <div id="co-lines"></div>
-    <div class="co-total"><span>Actual Total</span><span id="co-total-num" style="font-family:'DM Mono',monospace">$0.00</span></div>
+    <div class="co-total"><span>Total</span><span id="co-total-num" style="font-family:'DM Mono',monospace">$0.00</span></div>
     <div class="co-save" id="co-save"></div>
     <button class="btn-g" id="co-complete-btn">Complete Trip</button>
     <div class="gap-s"></div>
@@ -410,7 +473,52 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
   </div>
 </div>
 
-<!-- FEEDBACK -->
+<!-- ══ TRIP RECAP ══ -->
+<div class="overlay" id="recap-overlay">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="handle"></div>
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px">Trip Complete!</div>
+      <div style="display:flex;justify-content:center;margin-bottom:12px">
+        <div class="score-ring" style="width:96px;height:96px">
+          <svg viewBox="0 0 80 80" width="96" height="96">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#cfe4d8" stroke-width="8"/>
+            <circle id="recap-arc" cx="40" cy="40" r="34" fill="none" stroke="#18956a" stroke-width="8" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+          </svg>
+          <div class="score-letter" id="recap-letter" style="font-size:34px">—</div>
+        </div>
+      </div>
+      <div style="font-size:22px;font-weight:800" id="recap-headline"></div>
+      <div style="font-size:14px;color:var(--ink2);margin-top:6px" id="recap-sub"></div>
+    </div>
+    <div id="recap-streak" style="display:none;background:linear-gradient(135deg,#1a6cb0,#18956a);border-radius:12px;padding:12px 16px;margin-bottom:14px;color:#fff;text-align:center">
+      <div style="font-size:24px;margin-bottom:4px">🔥</div>
+      <div style="font-weight:800;font-size:16px" id="recap-streak-text"></div>
+    </div>
+    <div id="recap-badges" style="display:none;margin-bottom:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--amber);text-align:center;margin-bottom:8px">🏆 New achievement!</div>
+      <div id="recap-new-badges" style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap"></div>
+    </div>
+    <div id="recap-tip" style="display:none;background:var(--blt);border:1px solid #a8cce8;border-radius:12px;padding:13px 15px;margin-bottom:14px">
+      <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px">💡 Insight</div>
+      <div id="recap-tip-text" style="font-size:14px;color:var(--ink2);line-height:1.5"></div>
+    </div>
+    <button class="btn-g" id="recap-done-btn">Done</button>
+  </div>
+</div>
+
+<!-- ══ CONFIRM DIALOG ══ -->
+<div class="overlay" id="confirm-overlay">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="handle"></div>
+    <div class="shtitle" id="confirm-title">Are you sure?</div>
+    <div id="confirm-body" style="font-size:15px;color:var(--ink2);margin:-10px 0 20px;line-height:1.5"></div>
+    <button class="btn-g" id="confirm-ok-btn" style="background:var(--red)">Confirm</button>
+    <div class="gap-s"></div>
+    <button class="btn-o" id="confirm-cancel-btn">Cancel</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 <div class="abar" id="abar">
   <div id="a-ico" style="font-size:20px"></div>
@@ -418,716 +526,810 @@ select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// CATEGORIES
-// ═══════════════════════════════════════════════
-const CATS = [
-  {k:'produce',   n:'Produce',   e:'🥦', c:'#18956a'},
-  {k:'dairy',     n:'Dairy',     e:'🥛', c:'#0d7a6a'},
-  {k:'meat',      n:'Meat',      e:'🥩', c:'#c03030'},
-  {k:'bakery',    n:'Bakery',    e:'🍞', c:'#b86010'},
-  {k:'frozen',    n:'Frozen',    e:'🧊', c:'#1080b0'},
-  {k:'snacks',    n:'Snacks',    e:'🍿', c:'#e07010'},
-  {k:'beverages', n:'Beverages', e:'☕', c:'#6040a0'},
-  {k:'household', n:'Household', e:'🧴', c:'#107090'},
-  {k:'other',     n:'Other',     e:'📦', c:'#507060'},
+// ══════════════════════════════════════════
+// CONSTANTS
+// ══════════════════════════════════════════
+const CATS=[
+  {k:'produce',  n:'Produce',  e:'🥦',c:'#18956a'},
+  {k:'dairy',    n:'Dairy',    e:'🥛',c:'#0d7a6a'},
+  {k:'meat',     n:'Meat',     e:'🥩',c:'#c03030'},
+  {k:'bakery',   n:'Bakery',   e:'🍞',c:'#b86010'},
+  {k:'frozen',   n:'Frozen',   e:'🧊',c:'#1080b0'},
+  {k:'snacks',   n:'Snacks',   e:'🍿',c:'#e07010'},
+  {k:'beverages',n:'Beverages',e:'☕',c:'#6040a0'},
+  {k:'household',n:'Household',e:'🧴',c:'#107090'},
+  {k:'other',    n:'Other',    e:'📦',c:'#507060'},
 ];
-const STORES = ['Kroger','Whole Foods',"Trader Joe's",'Walmart','Target','Safeway','Aldi','Publix'];
-const DEF_BUD = {produce:60,dairy:30,meat:50,bakery:15,frozen:25,snacks:20,beverages:20,household:30,other:20};
-const KEY = 'cw5';
+const STORES=['Kroger','Whole Foods',"Trader Joe's",'Walmart','Target','Safeway','Aldi','Publix'];
+const DEF_BUD={produce:60,dairy:30,meat:50,bakery:15,frozen:25,snacks:20,beverages:20,household:30,other:20};
+const KEY='cw7';
+const CAT_COLS={produce:'#18956a',dairy:'#0d7a6a',meat:'#c03030',bakery:'#b86010',frozen:'#1080b0',snacks:'#e07010',beverages:'#6040a0',household:'#107090',other:'#507060'};
 
-// ═══════════════════════════════════════════════
+// list item: {id, name, cat, qty, inCart, actualPrice|null}
+// trip item: {name, cat, qty, actualPrice}
+
+const BADGE_DEFS=[
+  {id:'first_trip', ico:'🛒',name:'First Trip',    check:t=>t.length>=1},
+  {id:'under_5',    ico:'🎯',name:'5x Under Budget',check:t=>t.filter(x=>x.under).length>=5},
+  {id:'trips_10',   ico:'📦',name:'10 Trips',       check:t=>t.length>=10},
+  {id:'trips_25',   ico:'🏆',name:'25 Trips',       check:t=>t.length>=25},
+  {id:'streak_3',   ico:'🔥',name:'3-Trip Streak',  check:t=>calcStreak(t)>=3},
+  {id:'streak_5',   ico:'⚡',name:'5-Trip Streak',  check:t=>calcStreak(t)>=5},
+  {id:'saver',      ico:'💰',name:'Big Saver',      check:t=>t.some(x=>(x.budget-x.actual)>=20)},
+  {id:'tracker_10', ico:'📊',name:'Price Tracker',  check:t=>{const m={};t.forEach(tr=>tr.items.forEach(i=>{const k=i.name.toLowerCase().trim();m[k]=(m[k]||0)+1;}));return Object.values(m).some(v=>v>=3);}},
+  {id:'consistent', ico:'⭐',name:'Consistent',     check:t=>t.length>=5&&t.slice(-5).every(x=>x.under)},
+];
+
+// ══════════════════════════════════════════
 // STATE
-// ═══════════════════════════════════════════════
-// list item:  {id, name, price (planned), qty, cat, inCart, actualPrice|null}
-// trip state: tripActive, tripStore, lockedBudgets (snapshot), cart (items with actualPrice)
-let S = {
-  budgets: {...DEF_BUD},
-  list: [],
-  cart: [],
-  tripActive: false,
-  tripStore: '',
-  lockedBudgets: null,   // snapshot of budgets at trip start
-  trips: [],
+// ══════════════════════════════════════════
+let S={
+  budgets:{...DEF_BUD},
+  list:[],           // {id, name, cat, qty, inCart, actualPrice|null}
+  cart:[],           // {id, name, cat, qty, actualPrice}
+  tripActive:false, tripStore:'',
+  lockedBudgets:null,
+  trips:[],
+  earnedBadges:[],
+  onboardingDone:false,
 };
 
-function load() {
-  ['cw_mvp','cw_v2','cw3','cw4'].forEach(k => localStorage.removeItem(k));
-  try {
-    const r = localStorage.getItem(KEY);
-    if (r) { const p = JSON.parse(r); S = Object.assign({}, S, p); S.budgets = Object.assign({}, DEF_BUD, S.budgets); }
-    else S.trips = seedTrips();
-  } catch(e) { S.trips = seedTrips(); }
+function load(){
+  ['cw_mvp','cw_v2','cw3','cw4','cw5','cw6'].forEach(k=>localStorage.removeItem(k));
+  try{
+    const r=localStorage.getItem(KEY);
+    if(r){const p=JSON.parse(r);S=Object.assign({},S,p);S.budgets=Object.assign({},DEF_BUD,S.budgets);}
+    else S.trips=seedTrips();
+  }catch(e){S.trips=seedTrips();}
 }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
-function seedTrips() {
-  const now = new Date(), out = [];
-  for (let m = 5; m >= 1; m--) {
-    const n = Math.floor(Math.random()*2)+1;
-    for (let t = 0; t < n; t++) {
-      const d = new Date(now.getFullYear(), now.getMonth()-m, 4+t*9);
-      const items = Array.from({length: Math.floor(Math.random()*10)+5}, () => {
-        const c = CATS[Math.floor(Math.random()*CATS.length)];
-        const planned = +(Math.random()*10+1).toFixed(2);
-        const variance = (Math.random()-.4) * 0.8; // slight upward bias
-        return {name:'Item', cat:c.k, price:planned, qty:1, actualPrice:+(planned+variance).toFixed(2)};
+function seedTrips(){
+  const now=new Date(),out=[];
+  const items_list=['Bananas','Whole Milk','Chicken Breast','Sourdough Bread','Frozen Pizza','Potato Chips','Orange Juice','Dish Soap','Pasta','Cheddar Cheese','Ground Beef','Eggs','Greek Yogurt','Sparkling Water','Paper Towels'];
+  for(let m=5;m>=1;m--){
+    const n=Math.floor(Math.random()*2)+1;
+    for(let t2=0;t2<n;t2++){
+      const d=new Date(now.getFullYear(),now.getMonth()-m,4+t2*9);
+      const items=Array.from({length:Math.floor(Math.random()*10)+5},()=>{
+        const c=CATS[Math.floor(Math.random()*CATS.length)];
+        const name=items_list[Math.floor(Math.random()*items_list.length)];
+        return{name,cat:c.k,qty:1,actualPrice:+(Math.random()*10+1).toFixed(2)};
       });
-      const planned = +items.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2);
-      const actual  = +items.reduce((s,i)=>s+i.actualPrice*i.qty,0).toFixed(2);
-      const budget  = Object.values(DEF_BUD).reduce((s,v)=>s+v,0);
-      out.push({id:Date.now()+m*1e6+t, date:d.toISOString(),
+      const actual=+items.reduce((s,i)=>s+i.actualPrice*i.qty,0).toFixed(2);
+      const budget=Object.values(DEF_BUD).reduce((s,v)=>s+v,0);
+      out.push({id:Date.now()+m*1e6+t2,date:d.toISOString(),
         store:STORES[Math.floor(Math.random()*STORES.length)],
-        items, planned, actual, budget, under:actual<=budget,
-        lockedBudgets:{...DEF_BUD}});
+        items,actual,budget,under:actual<=budget,
+        lockedBudgets:{...DEF_BUD},
+        score:calcTripScore({actual,budget,items,lockedBudgets:{...DEF_BUD}})});
     }
   }
+  S.earnedBadges=BADGE_DEFS.filter(b=>b.check(out)).map(b=>b.id);
+  S.onboardingDone=true;
   return out;
 }
 
-// ═══════════════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════════════
-function go(name) {
-  document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
-  document.getElementById('s-'+name).classList.add('on');
-  document.getElementById('nb-'+name).classList.add('on');
-  if (name==='home')    renderHome();
-  if (name==='list')    renderList();
-  if (name==='budget')  renderBudget();
-  if (name==='history') renderHistory();
+// ══════════════════════════════════════════
+// GAMIFICATION
+// ══════════════════════════════════════════
+function calcStreak(trips){
+  if(!trips||!trips.length)return 0;
+  const s=[...trips].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  let n=0;for(const t of s){if(t.under)n++;else break;}return n;
 }
 
-// ═══════════════════════════════════════════════
-// HOME
-// ═══════════════════════════════════════════════
-function renderHome() {
-  const landing = document.getElementById('v-landing');
-  const tripV   = document.getElementById('v-trip');
+function calcTripScore(trip){
+  // 60pts: under budget, 40pts: categories under budget
+  let score=0;
+  const locked=trip.lockedBudgets||DEF_BUD;
+  const budget=Object.values(locked).reduce((s,v)=>s+v,0);
+  if(trip.actual<=budget) score+=60;
+  else score+=Math.max(0,60-Math.round((trip.actual-budget)/budget*100));
+  const byCat={};(trip.items||[]).forEach(i=>{byCat[i.cat]=(byCat[i.cat]||0)+i.actualPrice*i.qty;});
+  const catKeys=Object.keys(locked),catUnder=catKeys.filter(k=>!byCat[k]||byCat[k]<=locked[k]).length;
+  score+=Math.round(catUnder/catKeys.length*40);
+  return Math.min(100,score);
+}
 
-  if (!S.tripActive) {
-    landing.style.display = 'block';
-    tripV.style.display   = 'none';
-    return;
-  }
+function scoreToGrade(s){
+  if(s>=90)return{letter:'A+',col:'#18956a'};
+  if(s>=80)return{letter:'A', col:'#18956a'};
+  if(s>=70)return{letter:'B', col:'#1a6cb0'};
+  if(s>=60)return{letter:'C', col:'#c97c10'};
+  return{letter:'D',col:'#d03030'};
+}
 
-  landing.style.display = 'none';
-  tripV.style.display   = 'block';
-
-  const locked  = S.lockedBudgets || S.budgets;
-  const budTotal = Object.values(locked).reduce((s,v)=>s+v,0);
-  const planned  = S.list.reduce((s,i)=>s+i.price*i.qty,0);
-  const actual   = S.cart.reduce((s,i)=>s+i.actualPrice*i.qty,0);
-  const pct      = budTotal>0 ? actual/budTotal : 0;
-  const delta    = actual - planned;
-  const absD     = Math.abs(delta);
-
-  document.getElementById('trip-store-lbl').textContent = '📍 Shopping at '+S.tripStore;
-  document.getElementById('hero-planned').textContent   = fmt(planned);
-  document.getElementById('hero-planned-lbl').textContent = 'of '+fmt(budTotal)+' budget';
-  document.getElementById('hero-actual').textContent    = fmt(actual);
-
-  // Delta label
-  const deltaEl = document.getElementById('hero-delta');
-  if (S.cart.length === 0) {
-    deltaEl.textContent = 'no items yet'; deltaEl.style.color = 'var(--ink3)';
-  } else if (Math.abs(delta) < 0.01) {
-    deltaEl.textContent = 'exactly on plan'; deltaEl.style.color = 'var(--green)';
-  } else if (delta > 0) {
-    deltaEl.textContent = '+'+fmt(absD)+' over plan'; deltaEl.style.color = 'var(--red)';
-  } else {
-    deltaEl.textContent = '-'+fmt(absD)+' under plan'; deltaEl.style.color = 'var(--green)';
-  }
-
-  // Progress bar vs locked budget
-  const bar = document.getElementById('master-bar');
-  bar.style.width      = Math.min(pct*100,100)+'%';
-  bar.style.background = pct>=1?'var(--red)':pct>=.8?'var(--amber)':'var(--green)';
-
-  // Chips
-  let ov=0,nr=0,ok=0;
-  CATS.forEach(c => {
-    const sp = S.cart.filter(i=>i.cat===c.k).reduce((s,i)=>s+i.actualPrice*i.qty,0);
-    const p  = locked[c.k]>0 ? sp/locked[c.k] : 0;
-    if (p>=1) ov++; else if (p>=.8) nr++; else ok++;
+function generateTip(trips){
+  if(!trips||trips.length<2)return null;
+  const recent=trips.slice(-6);
+  // Consistent overspend in a category
+  const catOver={};
+  recent.forEach(t=>{
+    const locked=t.lockedBudgets||DEF_BUD;
+    const byCat={};t.items.forEach(i=>{byCat[i.cat]=(byCat[i.cat]||0)+i.actualPrice*i.qty;});
+    Object.keys(locked).forEach(k=>{if((byCat[k]||0)>locked[k])catOver[k]=(catOver[k]||0)+1;});
   });
-  document.getElementById('home-chips').innerHTML =
-    (ov ? `<span class="chip r">🔴 ${ov} over</span>` : '')
-   +(nr ? `<span class="chip a">⚡ ${nr} near</span>` : '')
-   +(ok ? `<span class="chip g">✓ ${ok} ok</span>` : '');
+  const top=Object.entries(catOver).sort((a,b)=>b[1]-a[1])[0];
+  if(top&&top[1]>=2){
+    const cat=CATS.find(c=>c.k===top[0]);
+    return`You've gone over your ${cat?cat.n:top[0]} budget ${top[1]} of your last ${recent.length} trips. Consider raising that limit by $5–$10.`;
+  }
+  // All under budget
+  if(recent.every(t=>t.under))return`You've stayed under budget every recent trip — great work! 🎉 Consider nudging your budget down $10 to save even more.`;
+  // Price inflation
+  const allItems={};
+  trips.forEach(t=>t.items.forEach(i=>{
+    const k=i.name.toLowerCase().trim();
+    if(!allItems[k])allItems[k]=[];
+    allItems[k].push({price:i.actualPrice,date:t.date});
+  }));
+  const inflated=Object.entries(allItems).filter(([,a])=>a.length>=3).map(([name,a])=>{
+    const sorted=[...a].sort((x,y)=>new Date(x.date)-new Date(y.date));
+    const pct=(sorted[sorted.length-1].price-sorted[0].price)/sorted[0].price;
+    return{name,pct,last:sorted[sorted.length-1].price};
+  }).filter(x=>x.pct>0.08).sort((a,b)=>b.pct-a.pct)[0];
+  if(inflated)return`${inflated.name} has gone up ${Math.round(inflated.pct*100)}% since you first tracked it (now ${fmt(inflated.last)}).`;
+  const under=recent.filter(t=>t.under).length;
+  return`You're under budget ${under} of your last ${recent.length} trips. Keep building the habit!`;
+}
 
-  // Cat rows — planned vs actual per category
-  document.getElementById('home-cats').innerHTML = CATS.map(cat => {
-    const plannedCat = S.list.filter(i=>i.cat===cat.k).reduce((s,i)=>s+i.price*i.qty,0);
-    const actualCat  = S.cart.filter(i=>i.cat===cat.k).reduce((s,i)=>s+i.actualPrice*i.qty,0);
-    const lockedBud  = locked[cat.k];
-    const p   = lockedBud>0 ? Math.min(actualCat/lockedBud,1) : 0;
-    const col = p>=1?'var(--red)':p>=.8?'var(--amber)':cat.c;
-    const catDelta = actualCat - plannedCat;
-    const inCart   = S.cart.filter(i=>i.cat===cat.k).length;
-    const onList   = S.list.filter(i=>i.cat===cat.k&&!i.inCart).length;
+function getPriceMemory(){
+  const m={};
+  S.trips.forEach(t=>t.items.forEach(i=>{
+    const k=i.name.toLowerCase().trim();
+    if(!m[k])m[k]={name:i.name,prices:[]};
+    m[k].prices.push({p:i.actualPrice,d:t.date});
+  }));
+  return Object.values(m).filter(x=>x.prices.length>=2).map(x=>{
+    const s=[...x.prices].sort((a,b)=>new Date(a.d)-new Date(b.d));
+    const first=s[0].p,last=s[s.length-1].p,pct=(last-first)/first;
+    return{name:x.name,first,last,pct,avg:s.reduce((a,b)=>a+b.p,0)/s.length,count:s.length};
+  }).filter(x=>Math.abs(x.pct)>0.03).sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct)).slice(0,6);
+}
 
-    return `<div class="crow">
+function getPriceHistForItem(name){
+  const k=name.toLowerCase().trim();const prices=[];
+  S.trips.forEach(t=>t.items.forEach(i=>{if(i.name.toLowerCase().trim()===k)prices.push(i.actualPrice);}));
+  if(!prices.length)return null;
+  return{count:prices.length,last:prices[prices.length-1],avg:prices.reduce((s,v)=>s+v,0)/prices.length};
+}
+
+function checkAndAwardBadges(trips){
+  const nb=[];
+  BADGE_DEFS.forEach(b=>{if(!S.earnedBadges.includes(b.id)&&b.check(trips)){S.earnedBadges.push(b.id);nb.push(b);}});
+  return nb;
+}
+
+// ══════════════════════════════════════════
+// ONBOARDING
+// ══════════════════════════════════════════
+let _obStep=0;
+function startOnboarding(){_obStep=0;showObStep(0);document.getElementById('ob-overlay').classList.add('open');}
+function showObStep(n){document.querySelectorAll('.ob-step').forEach(s=>s.classList.remove('on'));document.getElementById('ob-'+n).classList.add('on');renderObDots();}
+function renderObDots(){document.getElementById('ob-dots').innerHTML=Array.from({length:5},(_,i)=>`<div class="ob-dot${i===_obStep?' on':''}"></div>`).join('');}
+function obNext(){_obStep=Math.min(_obStep+1,4);showObStep(_obStep);}
+function obBack(){_obStep=Math.max(_obStep-1,0);showObStep(_obStep);}
+function obFinish(){document.getElementById('ob-overlay').classList.remove('open');S.onboardingDone=true;save();}
+
+// ══════════════════════════════════════════
+// NAV
+// ══════════════════════════════════════════
+function go(name){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('s-'+name).classList.add('on');
+  document.getElementById('nb-'+name).classList.add('on');
+  if(name==='home')renderHome();
+  if(name==='list')renderList();
+  if(name==='budget')renderBudget();
+  if(name==='history')renderHistory();
+}
+
+// ══════════════════════════════════════════
+// HOME
+// ══════════════════════════════════════════
+function renderHome(){
+  const landing=document.getElementById('v-landing');
+  const tripV=document.getElementById('v-trip');
+  if(!S.tripActive){landing.style.display='block';tripV.style.display='none';renderLanding();return;}
+  landing.style.display='none';tripV.style.display='block';
+  const locked=S.lockedBudgets||S.budgets;
+  const budTotal=Object.values(locked).reduce((s,v)=>s+v,0);
+  const actual=S.cart.reduce((s,i)=>s+i.actualPrice*i.qty,0);
+  const pct=budTotal>0?actual/budTotal:0;
+  document.getElementById('trip-store-lbl').textContent='📍 '+S.tripStore;
+  document.getElementById('hero-actual').textContent=fmt(actual);
+  document.getElementById('hero-sub').textContent='of '+fmt(budTotal)+' budget';
+  const bar=document.getElementById('master-bar');
+  bar.style.width=Math.min(pct*100,100)+'%';
+  bar.style.background=pct>=1?'var(--red)':pct>=.8?'var(--amber)':'var(--green)';
+  let ov=0,nr=0,ok=0;
+  CATS.forEach(c=>{
+    const sp=S.cart.filter(i=>i.cat===c.k).reduce((s,i)=>s+i.actualPrice*i.qty,0);
+    const p=locked[c.k]>0?sp/locked[c.k]:0;
+    if(p>=1)ov++;else if(p>=.8)nr++;else ok++;
+  });
+  document.getElementById('home-chips').innerHTML=
+    (ov?`<span class="chip r">🔴 ${ov} over</span>`:'')+
+    (nr?`<span class="chip a">⚡ ${nr} near</span>`:'')+
+    (ok?`<span class="chip g">✓ ${ok} ok</span>`:'');
+  document.getElementById('home-cats').innerHTML=CATS.map(cat=>{
+    const sp=S.cart.filter(i=>i.cat===cat.k).reduce((s,i)=>s+i.actualPrice*i.qty,0);
+    const lb=locked[cat.k];
+    const p=lb>0?Math.min(sp/lb,1):0;
+    const col=p>=1?'var(--red)':p>=.8?'var(--amber)':cat.c;
+    const onL=S.list.filter(i=>i.cat===cat.k&&!i.inCart).length;
+    return`<div class="crow">
       <div class="cico">${cat.e}</div>
-      <div class="cmid">
-        <div class="cname">${cat.n}</div>
+      <div class="cmid"><div class="cname">${cat.n}</div>
         <div class="bt" style="margin:4px 0"><div class="bf" style="width:${p*100}%;background:${col}"></div></div>
-        ${onList>0?`<div style="font-size:11px;color:var(--ink3)">${onList} still on list</div>`:''}
+        ${onL>0?`<div class="cnote">${onL} still on list</div>`:''}
       </div>
       <div class="cright">
-        <div class="cact" style="color:${col}">${fmt(actualCat)}</div>
-        <div class="cplan">plan: ${fmt(plannedCat)}</div>
-        ${inCart>0&&Math.abs(catDelta)>0.005?`<div style="font-size:11px;font-weight:700;color:${catDelta>0?'var(--red)':'var(--green)'}">${catDelta>0?'+':'-'}${fmt(Math.abs(catDelta))}</div>`:''}
+        <div class="cval" style="color:${col}">${fmt(sp)}</div>
+        <div class="cbudg">of ${fmt(lb)}</div>
       </div>
     </div>`;
   }).join('');
-
-  // Checkout / add buttons
-  document.getElementById('checkout-btn').style.display = S.cart.length ? 'flex' : 'none';
-  document.getElementById('co-label').textContent = fmt(actual);
+  document.getElementById('checkout-btn').style.display='flex';
+  document.getElementById('co-label').textContent=S.cart.length?fmt(actual):'End Trip';
 }
 
-// ═══════════════════════════════════════════════
-// TRIP START / END
-// ═══════════════════════════════════════════════
-let _tripDest = 'list';
-let _pendingToggleId = null;
+function renderLanding(){
+  const trips=S.trips;
+  const streak=calcStreak(trips);
+  const sb=document.getElementById('streak-banner');
+  if(streak>=2){sb.style.display='flex';document.getElementById('streak-text').textContent=streak+' trip streak!';document.getElementById('streak-sub').textContent='Under budget '+streak+' trips in a row 🔥';}
+  else sb.style.display='none';
+  const lsc=document.getElementById('last-score-card');
+  if(trips.length){
+    lsc.style.display='block';
+    const last=trips[trips.length-1];
+    const sc=last.score||calcTripScore(last);const gr=scoreToGrade(sc);
+    document.getElementById('score-arc').style.strokeDashoffset=213.6*(1-sc/100);
+    document.getElementById('score-arc').style.stroke=gr.col;
+    document.getElementById('score-letter').textContent=gr.letter;
+    document.getElementById('score-letter').style.color=gr.col;
+    document.getElementById('last-trip-store').textContent=last.store;
+    document.getElementById('last-trip-date').textContent=fmtDate(last.date);
+    const bd=last.budget-last.actual;
+    document.getElementById('last-trip-stat').textContent=bd>=0?`✓ ${fmt(bd)} under budget`:`✕ ${fmt(Math.abs(bd))} over budget`;
+    document.getElementById('last-trip-stat').style.color=bd>=0?'var(--green)':'var(--red)';
+  }else lsc.style.display='none';
+  const tip=generateTip(trips);
+  const tc=document.getElementById('tip-card');
+  if(tip&&trips.length>=2){tc.style.display='block';document.getElementById('tip-text').textContent=tip;}
+  else tc.style.display='none';
+}
 
-function startTrip(dest) {
-  _tripDest = dest || 'list';
-  const grid = document.getElementById('store-grid');
-  grid.innerHTML = STORES.map(s =>
-    `<button data-store="${s}" style="padding:11px 8px;border-radius:10px;border:1px solid var(--bord);background:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer">${s}</button>`
-  ).join('');
-  document.getElementById('store-input').value = '';
+// ══════════════════════════════════════════
+// TRIP
+// ══════════════════════════════════════════
+let _tripDest='list',_pendingToggleId=null,_directCartItem=null;
+
+function startTrip(dest){
+  _tripDest=dest||'list';
+  document.getElementById('store-grid').innerHTML=STORES.map(s=>`<button data-store="${s}" style="padding:11px 8px;border-radius:10px;border:1px solid var(--bord);background:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer">${s}</button>`).join('');
+  document.getElementById('store-input').value='';
   document.getElementById('store-overlay').classList.add('open');
-  setTimeout(() => document.getElementById('store-input').focus(), 350);
+  setTimeout(()=>document.getElementById('store-input').focus(),350);
 }
 
-function confirmStore(name) {
-  const store = name || document.getElementById('store-input').value.trim();
-  if (!store) return;
+function confirmStore(name){
+  const store=name||document.getElementById('store-input').value.trim();
+  if(!store)return;
   document.getElementById('store-overlay').classList.remove('open');
-
-  S.tripActive    = true;
-  S.tripStore     = store;
-  S.cart          = [];
-  S.lockedBudgets = {...S.budgets};  // LOCK budgets at trip start
-  S.list.forEach(i => i.inCart = false);
-  save();
-  renderHome();
+  S.tripActive=true;S.tripStore=store;S.cart=[];
+  S.lockedBudgets={...S.budgets};
+  S.list.forEach(i=>i.inCart=false);
+  save();renderHome();
   toast('Trip started at '+store+' — budget locked 🔒');
-
-  if (_pendingToggleId !== null) {
-    const pid = _pendingToggleId; _pendingToggleId = null;
-    openPriceConfirm(pid); return;
+  if(_tripDest==='cart-direct'&&_directCartItem){
+    const{name:n,cat,qty}=_directCartItem;_directCartItem=null;
+    openPriceConfirmForDirect({id:Date.now(),name:n,cat,qty});return;
   }
-  if (_tripDest === 'list')   go('list');
-  if (_tripDest === 'budget') go('budget');
+  if(_pendingToggleId!==null){const pid=_pendingToggleId;_pendingToggleId=null;openPriceConfirm(pid);return;}
+  if(_tripDest==='list')go('list');
+  else if(_tripDest==='budget')go('budget');
 }
 
-function endTrip() {
-  showConfirm(
-    'End Trip?',
-    'Your cart will be cleared. Items not yet checked off will stay on your list.',
-    function() {
-      S.tripActive    = false;
-      S.cart          = [];
-      S.lockedBudgets = null;
-      S.list.forEach(i => i.inCart = false);
-      Object.keys(alerted).forEach(k => delete alerted[k]);
-      save();
-      renderHome();
-      toast('Trip ended');
-    }
-  );
-}
-
-// ═══════════════════════════════════════════════
+// ══════════════════════════════════════════
 // LIST
-// ═══════════════════════════════════════════════
-function renderList() {
-  const pending = S.list.filter(i => !i.inCart);
-  const done    = S.list.filter(i =>  i.inCart);
+// ══════════════════════════════════════════
+function renderList(){
+  const pending=S.list.filter(i=>!i.inCart);
+  const done=S.list.filter(i=>i.inCart);
 
-  // Snapshot bar
-  const lt  = S.list.reduce((s,i)=>s+i.price*i.qty,0);
-  const bt  = Object.values(S.lockedBudgets||S.budgets).reduce((s,v)=>s+v,0);
-  const pct = bt>0 ? Math.min(lt/bt,1) : 0;
-  const col = pct>=1?'var(--red)':pct>=.8?'var(--amber)':'var(--green)';
-  document.getElementById('list-snap').innerHTML = `
+  // Simple count + category summary (no prices on list)
+  const catCounts={};
+  S.list.forEach(i=>{catCounts[i.cat]=(catCounts[i.cat]||0)+i.qty;});
+  const topCats=Object.entries(catCounts).sort((a,b)=>b[1]-a[1]).slice(0,4)
+    .map(([k,n])=>{const c=CATS.find(x=>x.k===k);return`<span class="chip d">${c?c.e:'📦'} ${n}</span>`;}).join('');
+  document.getElementById('list-snap').innerHTML=S.list.length?`
     <div style="background:var(--white);border:1px solid var(--bord);border-radius:var(--r);padding:12px 14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
-        <span style="font-size:13px;font-weight:600;color:var(--ink2)">${S.list.length} item${S.list.length!==1?'s':''} planned</span>
-        <span style="font-family:'DM Mono',monospace;font-size:13px;color:${col}">${fmt(lt)} <span style="color:var(--ink3)">/ ${fmt(bt)}</span></span>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:13px;font-weight:600;color:var(--ink2)">${S.list.length} item${S.list.length!==1?'s':''} on list</span>
+        <span style="font-size:12px;color:var(--ink3)">${done.length} in cart</span>
       </div>
-      <div class="bt"><div class="bf" style="width:${pct*100}%;background:${col}"></div></div>
-      ${pct>=1?'<div style="font-size:12px;color:var(--red);margin-top:6px;font-weight:600">⚠ List total exceeds budget</div>':''}
-    </div>`;
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${topCats}</div>
+    </div>`:'';
 
-  // Pending
-  const pEl = document.getElementById('list-pending');
-  const eEl = document.getElementById('list-empty');
-  if (!pending.length) { pEl.innerHTML=''; pEl.style.display='none'; eEl.style.display='block'; }
-  else { pEl.style.display='block'; eEl.style.display='none'; pEl.innerHTML=pending.map(liHTML).join(''); }
+  // Reuse last trip button
+  const rBar=document.getElementById('reuse-bar');
+  const lastTrip=S.trips.length?S.trips[S.trips.length-1]:null;
+  if(lastTrip&&!S.tripActive&&S.list.length===0){
+    rBar.style.display='block';
+    rBar.innerHTML=`<button id="reuse-btn" style="width:100%;padding:12px 14px;background:var(--blt);border:1px solid #a8cce8;border-radius:var(--r);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:var(--blue);cursor:pointer;display:flex;align-items:center;gap:10px">
+      <span style="font-size:20px">♻️</span>
+      <div style="text-align:left;flex:1">
+        <div>Reuse last trip's list</div>
+        <div style="font-size:12px;font-weight:400;color:#4a7aaa;margin-top:2px">${esc(lastTrip.store)} · ${lastTrip.items.length} items · ${fmtDate(lastTrip.date)}</div>
+      </div>
+    </button>`;
+    document.getElementById('reuse-btn').addEventListener('click',reuseLastTrip);
+  }else rBar.style.display='none';
 
-  // Done
-  const ds = document.getElementById('done-section');
-  if (!done.length) { ds.style.display='none'; }
-  else {
-    ds.style.display='block';
-    document.getElementById('done-ct').textContent = done.length;
-    document.getElementById('list-done').innerHTML = done.map(liHTML).join('');
-  }
+  const pEl=document.getElementById('list-pending'),eEl=document.getElementById('list-empty');
+  if(!pending.length){pEl.innerHTML='';pEl.style.display='none';eEl.style.display='block';}
+  else{pEl.style.display='block';eEl.style.display='none';pEl.innerHTML=pending.map(liHTML).join('');}
+  const ds=document.getElementById('done-section');
+  if(!done.length)ds.style.display='none';
+  else{ds.style.display='block';document.getElementById('done-ct').textContent=done.length;document.getElementById('list-done').innerHTML=done.map(liHTML).join('');}
 }
 
-function liHTML(item) {
-  const cat = CATS.find(c=>c.k===item.cat) || CATS[8];
-  const lineTotal = item.price * item.qty;
-  const hasActual = item.inCart && item.actualPrice != null;
-  const actualLine = hasActual ? item.actualPrice * item.qty : null;
-  const diff = hasActual ? actualLine - lineTotal : 0;
+function reuseLastTrip(){
+  const last=S.trips[S.trips.length-1];if(!last)return;
+  const seen=new Set();
+  S.list=last.items.filter(i=>{const k=i.name.toLowerCase().trim();if(seen.has(k))return false;seen.add(k);return true;})
+    .map(i=>({id:Date.now()+Math.random(),name:i.name,cat:i.cat,qty:i.qty||1,inCart:false,actualPrice:null}));
+  save();renderList();toast(`Loaded ${S.list.length} items ♻️`);
+}
 
-  return `<div class="li">
+function liHTML(item){
+  const cat=CATS.find(c=>c.k===item.cat)||CATS[8];
+  return`<div class="li">
     <button class="lichk${item.inCart?' done':''}" data-toggle="${item.id}"></button>
     <div class="libody" data-edit="${item.id}">
       <div class="liname${item.inCart?' done':''}">${esc(item.name)}${item.qty>1?' x'+item.qty:''}</div>
       <div class="licat">${cat.e} ${cat.n}${!item.inCart?' &middot; <span style="color:var(--green);font-size:11px;font-weight:700">edit</span>':''}</div>
     </div>
-    <div class="liprice">
-      <div>${fmt(lineTotal)}</div>
-      ${hasActual?`<div class="liact" style="color:${diff>0.005?'var(--red)':diff<-0.005?'var(--green)':'var(--ink3)'}">${diff>0.005?'▲':'▼'} ${fmt(Math.abs(diff))} actual</div>`:''}
-    </div>
+    ${item.inCart&&item.actualPrice!=null?`<div class="liprice">${fmt(item.actualPrice*item.qty)}</div>`:'<div style="width:40px"></div>'}
     ${!item.inCart?`<button class="lidel" data-del="${item.id}">&times;</button>`:'<div style="width:26px"></div>'}
   </div>`;
 }
 
-function bindListEvents() {
-  ['list-pending','list-done'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener('click', e => {
-      const tog = e.target.closest('[data-toggle]');
-      const edt = e.target.closest('[data-edit]');
-      const del = e.target.closest('[data-del]');
-      if (tog) checkItemOff(+tog.dataset.toggle);
-      else if (edt) openItemSheet('edit', +edt.dataset.edit);
-      else if (del) deleteItem(+del.dataset.del);
+function bindListEvents(){
+  ['list-pending','list-done'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.addEventListener('click',e=>{
+      const tog=e.target.closest('[data-toggle]'),edt=e.target.closest('[data-edit]'),del=e.target.closest('[data-del]');
+      if(tog)checkItemOff(+tog.dataset.toggle);
+      else if(edt)openItemSheet('edit',+edt.dataset.edit);
+      else if(del)deleteItem(+del.dataset.del);
     });
   });
 }
 
-// Checking off an item → open price confirm sheet
-function checkItemOff(id) {
-  const item = S.list.find(i=>i.id===id);
-  if (!item) return;
-
-  if (item.inCart) {
-    // Uncheck — remove from cart
-    item.inCart = false;
-    item.actualPrice = null;
-    S.cart = S.cart.filter(i=>i.id!==id);
-    save(); renderList(); renderHome();
-    return;
-  }
-
-  // Checking ON → need a trip first
-  if (!S.tripActive) {
-    _pendingToggleId = id;
-    startTrip('list');
-    return;
-  }
-
-  // Open price confirm sheet
+function checkItemOff(id){
+  const item=S.list.find(i=>i.id===id);if(!item)return;
+  if(item.inCart){item.inCart=false;item.actualPrice=null;S.cart=S.cart.filter(i=>i.id!==id);save();renderList();renderHome();return;}
+  if(!S.tripActive){_pendingToggleId=id;startTrip('list');return;}
   openPriceConfirm(id);
 }
 
-// ═══════════════════════════════════════════════
-// PRICE CONFIRM SHEET
-// ═══════════════════════════════════════════════
-let _confirmingId = null;
+// ══════════════════════════════════════════
+// PRICE CONFIRM (in-store, actual only)
+// ══════════════════════════════════════════
+let _confirmingId=null;
+let _confirmingDirect=null; // for "Add to Cart" items not on list
 
-function openPriceConfirm(id) {
-  const item = S.list.find(i=>i.id===id);
-  if (!item) return;
-  _confirmingId = id;
-
-  const cat    = CATS.find(c=>c.k===item.cat) || CATS[8];
-  const locked = S.lockedBudgets || S.budgets;
-  const spent  = S.cart.filter(i=>i.cat===item.cat).reduce((s,i)=>s+i.actualPrice*i.qty,0);
-  const remain = locked[item.cat] - spent;
-
-  document.getElementById('pconf-item-name').textContent   = item.name;
-  document.getElementById('pconf-planned-price').textContent = fmt(item.price * item.qty);
-  document.getElementById('pconf-actual-input').value       = item.price; // pre-fill with planned
-  document.getElementById('pconf-cat-label').textContent    = cat.e+' '+cat.n+' budget remaining';
-  document.getElementById('pconf-cat-remaining').textContent = fmt(Math.max(0,remain));
-  document.getElementById('pconf-cat-remaining').style.color = remain<0?'var(--red)':remain<10?'var(--amber)':'var(--green)';
-  document.getElementById('pconf-delta').style.display      = 'none';
-
+function openPriceConfirm(id){
+  const item=S.list.find(i=>i.id===id);if(!item)return;
+  _confirmingId=id;_confirmingDirect=null;
+  const cat=CATS.find(c=>c.k===item.cat)||CATS[8];
+  const locked=S.lockedBudgets||S.budgets;
+  const spent=S.cart.filter(i=>i.cat===item.cat).reduce((s,i)=>s+i.actualPrice*i.qty,0);
+  const remain=locked[item.cat]-spent;
+  document.getElementById('pconf-item-name').textContent=item.qty>1?item.name+' x'+item.qty:item.name;
+  document.getElementById('pconf-item-cat').textContent=cat.e+' '+cat.n;
+  document.getElementById('pconf-price').value='';
+  document.getElementById('pconf-cat-label').textContent=cat.e+' '+cat.n+' budget remaining';
+  document.getElementById('pconf-cat-remaining').textContent=fmt(Math.max(0,remain));
+  document.getElementById('pconf-cat-remaining').style.color=remain<0?'var(--red)':remain<10?'var(--amber)':'var(--green)';
+  // Price memory
+  const hist=getPriceHistForItem(item.name);
+  const hEl=document.getElementById('pconf-hist-hint');
+  if(hist){hEl.style.display='block';hEl.textContent=`Last paid ${fmt(hist.last)} · Avg ${fmt(hist.avg)} over ${hist.count} trip${hist.count>1?'s':''}`;} 
+  else hEl.style.display='none';
   document.getElementById('pconf-overlay').classList.add('open');
-  setTimeout(() => {
-    const inp = document.getElementById('pconf-actual-input');
-    inp.focus(); inp.select();
-  }, 320);
+  setTimeout(()=>{document.getElementById('pconf-price').focus();},320);
 }
 
-function updatePconfDelta() {
-  const item = S.list.find(i=>i.id===_confirmingId);
-  if (!item) return;
-  const actual   = parseFloat(document.getElementById('pconf-actual-input').value)||0;
-  const planned  = item.price * item.qty;
-  const actualLine = actual * item.qty;
-  const diff     = actualLine - planned;
-  const el       = document.getElementById('pconf-delta');
-  if (Math.abs(diff) < 0.005) { el.style.display='none'; return; }
-  el.style.display = 'block';
-  el.textContent   = diff>0 ? `▲ ${fmt(diff)} over plan` : `▼ ${fmt(Math.abs(diff))} under plan`;
-  el.style.background = diff>0 ? 'var(--rlt)' : 'var(--glt)';
-  el.style.color      = diff>0 ? 'var(--red)'  : 'var(--green)';
+function openPriceConfirmForDirect(item){
+  _confirmingId=null;_confirmingDirect=item;
+  const cat=CATS.find(c=>c.k===item.cat)||CATS[8];
+  const locked=S.lockedBudgets||S.budgets;
+  const spent=S.cart.filter(i=>i.cat===item.cat).reduce((s,i)=>s+i.actualPrice*i.qty,0);
+  const remain=locked[item.cat]-spent;
+  document.getElementById('pconf-item-name').textContent=item.qty>1?item.name+' x'+item.qty:item.name;
+  document.getElementById('pconf-item-cat').textContent=cat.e+' '+cat.n;
+  document.getElementById('pconf-price').value='';
+  document.getElementById('pconf-cat-label').textContent=cat.e+' '+cat.n+' budget remaining';
+  document.getElementById('pconf-cat-remaining').textContent=fmt(Math.max(0,remain));
+  document.getElementById('pconf-cat-remaining').style.color=remain<0?'var(--red)':remain<10?'var(--amber)':'var(--green)';
+  const hist=getPriceHistForItem(item.name);
+  const hEl=document.getElementById('pconf-hist-hint');
+  if(hist){hEl.style.display='block';hEl.textContent=`Last paid ${fmt(hist.last)} · Avg ${fmt(hist.avg)}`;}
+  else hEl.style.display='none';
+  document.getElementById('pconf-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('pconf-price').focus(),320);
 }
 
-function confirmActualPrice() {
-  const item = S.list.find(i=>i.id===_confirmingId);
-  if (!item) return;
-  const actualPricePerUnit = parseFloat(document.getElementById('pconf-actual-input').value);
-  if (isNaN(actualPricePerUnit) || actualPricePerUnit <= 0) {
-    document.getElementById('pconf-actual-input').focus(); return;
-  }
-
-  item.inCart       = true;
-  item.actualPrice  = actualPricePerUnit;
-  S.cart.push({...item}); // push a snapshot into cart
-
+function confirmActualPrice(){
+  const ap=parseFloat(document.getElementById('pconf-price').value);
+  if(isNaN(ap)||ap<=0){document.getElementById('pconf-price').focus();return;}
   document.getElementById('pconf-overlay').classList.remove('open');
-  _confirmingId = null;
 
-  checkBudgetAlert(item.cat);
-  save(); renderList(); renderHome();
+  if(_confirmingDirect){
+    const item={..._confirmingDirect,actualPrice:ap};
+    S.list.push({...item,inCart:true});S.cart.push(item);
+    _confirmingDirect=null;
+    checkBudgetAlert(item.cat);save();renderList();renderHome();
+    toast('Added: '+item.name+' — '+fmt(ap*item.qty));return;
+  }
 
-  const diff = (actualPricePerUnit - item.price)*item.qty;
-  const diffStr = Math.abs(diff)<0.005 ? 'on plan' : diff>0 ? '+'+fmt(diff)+' over' : fmt(Math.abs(diff))+' under';
-  toast(item.name+' added — '+diffStr);
+  const item=S.list.find(i=>i.id===_confirmingId);if(!item)return;
+  item.inCart=true;item.actualPrice=ap;
+  S.cart.push({id:item.id,name:item.name,cat:item.cat,qty:item.qty,actualPrice:ap});
+  _confirmingId=null;
+  checkBudgetAlert(item.cat);save();renderList();renderHome();
+  toast(item.name+' — '+fmt(ap*item.qty));
 }
 
-// ═══════════════════════════════════════════════
-// ITEM SHEET (add/edit list items)
-// ═══════════════════════════════════════════════
-let _sheetMode = 'list', _editId = null;
+// ══════════════════════════════════════════
+// ITEM SHEET (name + category + qty, no price)
+// ══════════════════════════════════════════
+let _sheetMode='list',_editId=null;
 
-function openItemSheet(mode, id) {
-  _sheetMode = mode; _editId = id||null;
-  const isEdit = mode==='edit', isCart = mode==='cart';
-  document.getElementById('item-title').textContent   = isEdit?'Edit Item':isCart?'Add to Cart':'Add to List';
-  document.getElementById('item-save-btn').textContent = isEdit?'Save Changes':isCart?'Add to Cart':'Add to List';
-
-  if (isEdit && id) {
-    const item = S.list.find(i=>i.id===id); if(!item) return;
-    document.getElementById('f-name').value  = item.name;
-    document.getElementById('f-price').value = item.price;
-    document.getElementById('f-qty').value   = item.qty;
-    document.getElementById('f-cat').value   = item.cat;
-  } else {
-    document.getElementById('f-name').value  = '';
-    document.getElementById('f-price').value = '';
-    document.getElementById('f-qty').value   = '1';
-    document.getElementById('f-cat').value   = 'other';
+function openItemSheet(mode,id){
+  _sheetMode=mode;_editId=id||null;
+  const isEdit=mode==='edit',isCart=mode==='cart';
+  document.getElementById('item-title').textContent=isEdit?'Edit Item':isCart?'Add to Cart':'Add to List';
+  document.getElementById('item-save-btn').textContent=isEdit?'Save Changes':isCart?'Next: Enter Price':'Add to List';
+  if(isEdit&&id){
+    const item=S.list.find(i=>i.id===id);if(!item)return;
+    document.getElementById('f-name').value=item.name;
+    document.getElementById('f-cat').value=item.cat;
+    document.getElementById('f-qty').value=item.qty;
+  }else{
+    document.getElementById('f-name').value='';
+    document.getElementById('f-cat').value='other';
+    document.getElementById('f-qty').value='1';
   }
-  updateHint();
+  // Price memory hint in add sheet
+  showItemHistHint(document.getElementById('f-name').value);
   document.getElementById('item-overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('f-name').focus(), 320);
+  setTimeout(()=>document.getElementById('f-name').focus(),320);
 }
 
-function closeItemSheet() { document.getElementById('item-overlay').classList.remove('open'); }
-
-function updateHint() {
-  const hint  = document.getElementById('f-hint');
-  const price = parseFloat(document.getElementById('f-price').value)||0;
-  const qty   = parseInt(document.getElementById('f-qty').value)||1;
-  const catK  = document.getElementById('f-cat').value;
-  if (!price) { hint.style.display='none'; return; }
-
-  const cat    = CATS.find(c=>c.k===catK)||CATS[8];
-  const locked = S.lockedBudgets||S.budgets;
-  const bud    = locked[catK]||0;
-  const spent  = S.cart.filter(i=>i.cat===catK&&i.id!==_editId).reduce((s,i)=>s+i.actualPrice*i.qty,0);
-  const line   = price*qty;
-  const after  = spent+line;
-  const p      = bud>0?after/bud:0;
-
-  let msg, col;
-  if (p>=1)       { msg=`Over ${cat.n} budget by ${fmt(after-bud)}`; col='var(--red)'; }
-  else if (p>=.8) { msg=`Only ${fmt(bud-after)} left in ${cat.n}`;   col='var(--amber)'; }
-  else            { msg=`${cat.e} ${cat.n}: ${fmt(bud-spent)} remaining`; col='var(--ink2)'; }
-
-  hint.style.display='block'; hint.style.color=col; hint.textContent=msg;
+function showItemHistHint(name){
+  const hist=getPriceHistForItem(name);
+  const h=document.getElementById('item-hist-hint');
+  if(hist&&name.trim()){h.style.display='block';h.textContent=`💰 Last paid ${fmt(hist.last)} · Avg ${fmt(hist.avg)} over ${hist.count} trip${hist.count>1?'s':''}`;}
+  else h.style.display='none';
 }
 
-function saveItem() {
-  const name  = document.getElementById('f-name').value.trim();
-  const price = parseFloat(document.getElementById('f-price').value);
-  const qty   = Math.max(1, parseInt(document.getElementById('f-qty').value)||1);
-  const cat   = document.getElementById('f-cat').value;
-  if (!name)        { document.getElementById('f-name').focus(); return; }
-  if (!price||price<=0) { document.getElementById('f-price').focus(); return; }
+function closeItemSheet(){document.getElementById('item-overlay').classList.remove('open');}
 
-  if (_sheetMode==='edit') {
-    const li = S.list.find(i=>i.id===_editId);
-    if (li) {
-      li.name=name; li.price=price; li.qty=qty; li.cat=cat;
-      // Sync planned price change into cart snapshot (actual stays unchanged)
-      const ci = S.cart.find(i=>i.id===_editId);
-      if (ci) { ci.name=name; ci.qty=qty; ci.cat=cat; }
-    }
-    closeItemSheet(); save(); renderList(); renderHome();
-    toast('Updated: '+name); return;
+function saveItem(){
+  const name=document.getElementById('f-name').value.trim();
+  const cat=document.getElementById('f-cat').value;
+  const qty=Math.max(1,parseInt(document.getElementById('f-qty').value)||1);
+  if(!name){document.getElementById('f-name').focus();return;}
+
+  if(_sheetMode==='edit'){
+    const li=S.list.find(i=>i.id===_editId);
+    if(li){li.name=name;li.cat=cat;li.qty=qty;
+      const ci=S.cart.find(i=>i.id===_editId);if(ci){ci.name=name;ci.cat=cat;ci.qty=qty;}}
+    closeItemSheet();save();renderList();renderHome();toast('Updated: '+name);return;
   }
 
-  if (_sheetMode==='cart') {
-    // Direct cart add — skip price confirm, use entered price as both planned & actual
-    if (!S.tripActive) {
-      _pendingToggleId = null;
-      _tripDest = 'cart-direct';
-      _directCartItem = {name,price,qty,cat};
-      startTrip('list'); closeItemSheet(); return;
-    }
-    const item = {id:Date.now(),name,price,qty,cat,inCart:true,actualPrice:price};
-    S.list.push(item);
-    S.cart.push({...item});
-    checkBudgetAlert(cat);
-    closeItemSheet(); save(); renderList(); renderHome();
-    toast('Added to cart: '+name+' — '+fmt(price*qty)); return;
+  if(_sheetMode==='cart'){
+    // Add to cart directly — need price, so go to price confirm
+    closeItemSheet();
+    const directItem={id:Date.now(),name,cat,qty};
+    if(!S.tripActive){_tripDest='cart-direct';_directCartItem={name,cat,qty};startTrip('list');return;}
+    openPriceConfirmForDirect(directItem);return;
   }
 
-  // Add to list
-  S.list.push({id:Date.now(),name,price,qty,cat,inCart:false,actualPrice:null});
-  closeItemSheet(); save(); renderList(); renderHome();
-  toast('Added to list: '+name);
+  S.list.push({id:Date.now(),name,cat,qty,inCart:false,actualPrice:null});
+  closeItemSheet();save();renderList();renderHome();toast('Added: '+name);
 }
 
-let _directCartItem = null;
+function deleteItem(id){S.list=S.list.filter(i=>i.id!==id);S.cart=S.cart.filter(i=>i.id!==id);save();renderList();renderHome();}
+function clearDone(){S.list=S.list.filter(i=>!i.inCart);save();renderList();renderHome();}
 
-// Handle post-store-confirm for direct cart add
-function _postStoreConfirm() {
-  if (_tripDest==='cart-direct' && _directCartItem) {
-    const {name,price,qty,cat} = _directCartItem; _directCartItem=null;
-    const item = {id:Date.now(),name,price,qty,cat,inCart:true,actualPrice:price};
-    S.list.push(item); S.cart.push({...item});
-    checkBudgetAlert(cat); save(); renderList(); renderHome();
-    toast('Added to cart: '+name);
-  } else if (_pendingToggleId!==null) {
-    const pid=_pendingToggleId; _pendingToggleId=null; openPriceConfirm(pid);
-  } else if (_tripDest==='list')   go('list');
-  else if (_tripDest==='budget')   go('budget');
-}
-
-function deleteItem(id) {
-  S.list=S.list.filter(i=>i.id!==id);
-  S.cart=S.cart.filter(i=>i.id!==id);
-  save(); renderList(); renderHome();
-}
-function clearDone() {
-  S.list=S.list.filter(i=>!i.inCart);
-  save(); renderList(); renderHome();
-}
-
-// ═══════════════════════════════════════════════
+// ══════════════════════════════════════════
 // BUDGET ALERTS
-// ═══════════════════════════════════════════════
-const alerted = {};
-function checkBudgetAlert(catK) {
-  const cat    = CATS.find(c=>c.k===catK); if(!cat) return;
-  const locked = S.lockedBudgets||S.budgets;
-  const sp     = S.cart.filter(i=>i.cat===catK).reduce((s,i)=>s+i.actualPrice*i.qty,0);
-  const bud    = locked[catK];
-  const p      = bud>0?sp/bud:0;
-  if (p>=1&&alerted[catK]!=='over') {
-    alerted[catK]='over';
-    showAlert('red','🚨',cat.e+' '+cat.n+' over budget!','Actual spend: '+fmt(sp)+' of '+fmt(bud));
-  } else if (p>=.8&&p<1&&alerted[catK]!=='near') {
-    alerted[catK]='near';
-    showAlert('amber','⚠️',cat.e+' '+cat.n+' at 80%',fmt(bud-sp)+' remaining');
-  }
+// ══════════════════════════════════════════
+const alerted={};
+function checkBudgetAlert(catK){
+  const cat=CATS.find(c=>c.k===catK);if(!cat)return;
+  const locked=S.lockedBudgets||S.budgets;
+  const sp=S.cart.filter(i=>i.cat===catK).reduce((s,i)=>s+i.actualPrice*i.qty,0);
+  const bud=locked[catK],p=bud>0?sp/bud:0;
+  if(p>=1&&alerted[catK]!=='over'){alerted[catK]='over';showAlert('red','🚨',cat.e+' '+cat.n+' over budget!','Spent '+fmt(sp)+' of '+fmt(bud));}
+  else if(p>=.8&&p<1&&alerted[catK]!=='near'){alerted[catK]='near';showAlert('amber','⚠️',cat.e+' '+cat.n+' at 80%',fmt(bud-sp)+' remaining');}
 }
 let alertT;
 function showAlert(type,icon,title,sub){
-  const b=document.getElementById('abar');
-  b.className='abar '+type+' show';
-  document.getElementById('a-ico').textContent=icon;
-  document.getElementById('a-ttl').textContent=title;
-  document.getElementById('a-sub').textContent=sub;
-  clearTimeout(alertT); alertT=setTimeout(()=>b.classList.remove('show'),4500);
+  const b=document.getElementById('abar');b.className='abar '+type+' show';
+  document.getElementById('a-ico').textContent=icon;document.getElementById('a-ttl').textContent=title;document.getElementById('a-sub').textContent=sub;
+  clearTimeout(alertT);alertT=setTimeout(()=>b.classList.remove('show'),4500);
 }
 
-// ═══════════════════════════════════════════════
+// ══════════════════════════════════════════
 // CHECKOUT
-// ═══════════════════════════════════════════════
-function openCheckout() {
-  const actual  = S.cart.reduce((s,i)=>s+i.actualPrice*i.qty,0);
-  const planned = S.list.reduce((s,i)=>s+i.price*i.qty,0);
-  const locked  = S.lockedBudgets||S.budgets;
-  const budget  = Object.values(locked).reduce((s,v)=>s+v,0);
-  const byCat   = {};
-  S.cart.forEach(i=>{ byCat[i.cat]=(byCat[i.cat]||0)+i.actualPrice*i.qty; });
-
-  document.getElementById('co-lines').innerHTML = CATS.filter(c=>byCat[c.k]).map(c=>
-    `<div class="co-line"><span>${c.e} ${c.n}</span><span style="font-family:'DM Mono',monospace">${fmt(byCat[c.k])}</span></div>`
-  ).join('');
-  document.getElementById('co-total-num').textContent = fmt(actual);
-
-  const planDiff   = actual - planned;
-  const budgetDiff = budget - actual;
-  const saveEl = document.getElementById('co-save');
-
-  let msg = '';
-  if (budgetDiff>=0) {
-    msg = `🎉 $${budgetDiff.toFixed(2)} under budget`;
-    saveEl.style.background='var(--glt)'; saveEl.style.color='var(--green)';
-  } else {
-    msg = `💸 $${Math.abs(budgetDiff).toFixed(2)} over budget`;
-    saveEl.style.background='var(--rlt)'; saveEl.style.color='var(--red)';
+// ══════════════════════════════════════════
+function openCheckout(){
+  if(!S.cart.length){
+    document.getElementById('co-title').textContent='End Trip';
+    document.getElementById('co-lines').innerHTML='<div style="text-align:center;padding:16px 0;color:var(--ink3);font-size:14px">No items were added to cart.</div>';
+    document.getElementById('co-total-num').textContent='$0.00';
+    const se=document.getElementById('co-save');se.textContent='Tap Complete to end the trip.';se.style.background='var(--surf)';se.style.color='var(--ink3)';
+    document.getElementById('co-overlay').classList.add('open');return;
   }
-  if (Math.abs(planDiff)>0.01) {
-    msg += planDiff>0 ? ` · $${planDiff.toFixed(2)} over plan` : ` · $${Math.abs(planDiff).toFixed(2)} under plan`;
-  }
-  saveEl.textContent = msg;
+  const actual=S.cart.reduce((s,i)=>s+i.actualPrice*i.qty,0);
+  const locked=S.lockedBudgets||S.budgets;
+  const budget=Object.values(locked).reduce((s,v)=>s+v,0);
+  const byCat={};S.cart.forEach(i=>{byCat[i.cat]=(byCat[i.cat]||0)+i.actualPrice*i.qty;});
+  document.getElementById('co-title').textContent='Checkout';
+  document.getElementById('co-lines').innerHTML=CATS.filter(c=>byCat[c.k]).map(c=>`<div class="co-line"><span>${c.e} ${c.n}</span><span style="font-family:'DM Mono',monospace">${fmt(byCat[c.k])}</span></div>`).join('');
+  document.getElementById('co-total-num').textContent=fmt(actual);
+  const bd=budget-actual;
+  const se=document.getElementById('co-save');
+  se.textContent=bd>=0?`🎉 $${bd.toFixed(2)} under budget!`:`💸 $${Math.abs(bd).toFixed(2)} over budget`;
+  se.style.background=bd>=0?'var(--glt)':'var(--rlt)';se.style.color=bd>=0?'var(--green)':'var(--red)';
   document.getElementById('co-overlay').classList.add('open');
 }
+function closeCheckout(){document.getElementById('co-overlay').classList.remove('open');}
 
-function closeCheckout() { document.getElementById('co-overlay').classList.remove('open'); }
-
-function completeTrip() {
-  const actual  = S.cart.reduce((s,i)=>s+i.actualPrice*i.qty,0);
-  const planned = S.list.reduce((s,i)=>s+i.price*i.qty,0);
-  const locked  = S.lockedBudgets||S.budgets;
-  const budget  = Object.values(locked).reduce((s,v)=>s+v,0);
-
-  S.trips.push({
-    id:Date.now(), date:new Date().toISOString(), store:S.tripStore,
-    items: S.cart.map(i=>({name:i.name,cat:i.cat,price:i.price,qty:i.qty,actualPrice:i.actualPrice})),
-    planned:+planned.toFixed(2), actual:+actual.toFixed(2),
-    budget, under:actual<=budget, lockedBudgets:{...locked}
-  });
-
-  S.cart=[]; S.tripActive=false; S.lockedBudgets=null;
+function completeTrip(){
+  if(!S.cart.length){
+    S.tripActive=false;S.lockedBudgets=null;S.list.forEach(i=>i.inCart=false);
+    Object.keys(alerted).forEach(k=>delete alerted[k]);
+    save();closeCheckout();renderHome();toast('Trip ended');return;
+  }
+  const actual=S.cart.reduce((s,i)=>s+i.actualPrice*i.qty,0);
+  const locked=S.lockedBudgets||S.budgets;
+  const budget=Object.values(locked).reduce((s,v)=>s+v,0);
+  const trip={id:Date.now(),date:new Date().toISOString(),store:S.tripStore,
+    items:S.cart.map(i=>({name:i.name,cat:i.cat,qty:i.qty,actualPrice:i.actualPrice})),
+    actual:+actual.toFixed(2),budget,under:actual<=budget,lockedBudgets:{...locked}};
+  trip.score=calcTripScore(trip);
+  S.trips.push(trip);
+  const newBadges=checkAndAwardBadges(S.trips);
+  S.cart=[];S.tripActive=false;S.lockedBudgets=null;
   S.list=S.list.filter(i=>!i.inCart);
   Object.keys(alerted).forEach(k=>delete alerted[k]);
-  save(); closeCheckout(); go('history');
-  toast('Trip saved! 🎉');
+  save();closeCheckout();
+  showRecap(trip,newBadges);
 }
 
-// ═══════════════════════════════════════════════
+// ══════════════════════════════════════════
+// RECAP
+// ══════════════════════════════════════════
+function showRecap(trip,newBadges){
+  const sc=trip.score,gr=scoreToGrade(sc);
+  document.getElementById('recap-arc').style.strokeDashoffset=213.6*(1-sc/100);
+  document.getElementById('recap-arc').style.stroke=gr.col;
+  document.getElementById('recap-letter').textContent=gr.letter;
+  document.getElementById('recap-letter').style.color=gr.col;
+  const bd=trip.budget-trip.actual;
+  document.getElementById('recap-headline').textContent=sc>=90?'Perfect trip! 🎉':sc>=75?'Great trip! 👏':sc>=60?'Solid trip 👍':'Keep going! 💪';
+  document.getElementById('recap-sub').textContent=bd>=0?`$${bd.toFixed(2)} under budget`:`$${Math.abs(bd).toFixed(2)} over budget`;
+  document.getElementById('recap-sub').style.color=bd>=0?'var(--green)':'var(--red)';
+  const streak=calcStreak(S.trips);
+  const sEl=document.getElementById('recap-streak');
+  if(streak>=2){sEl.style.display='block';document.getElementById('recap-streak-text').textContent=streak+' trip streak under budget! 🔥';}
+  else sEl.style.display='none';
+  const bEl=document.getElementById('recap-badges');
+  if(newBadges.length){bEl.style.display='block';document.getElementById('recap-new-badges').innerHTML=newBadges.map(b=>`<div class="badge earned"><div class="badge-ico">${b.ico}</div><div class="badge-name">${b.name}</div></div>`).join('');}
+  else bEl.style.display='none';
+  const tip=generateTip(S.trips);
+  const tEl=document.getElementById('recap-tip');
+  if(tip){tEl.style.display='block';document.getElementById('recap-tip-text').textContent=tip;}
+  else tEl.style.display='none';
+  document.getElementById('recap-overlay').classList.add('open');
+}
+
+// ══════════════════════════════════════════
 // BUDGET
-// ═══════════════════════════════════════════════
-function renderBudget() {
-  const locked = S.tripActive;
-  document.getElementById('bud-locked-notice').style.display = locked?'block':'none';
-  document.getElementById('bud-rows').innerHTML = CATS.map(cat=>`
+// ══════════════════════════════════════════
+function renderBudget(){
+  const locked=S.tripActive;
+  document.getElementById('bud-locked-notice').style.display=locked?'block':'none';
+  document.getElementById('bud-rows').innerHTML=CATS.map(cat=>`
     <div class="brow${locked?' blocked':''}">
-      <div class="btop">
-        <div class="blbl">${cat.e} ${cat.n}</div>
+      <div class="btop"><div class="blbl">${cat.e} ${cat.n}</div>
         <div class="bctrl">
           <button class="bbtn" onclick="adjBud('${cat.k}',-5)">&#8722;</button>
           <div class="bval" id="bv-${cat.k}">${fmt(S.budgets[cat.k])}</div>
           <button class="bbtn" onclick="adjBud('${cat.k}',5)">&#43;</button>
-        </div>
-      </div>
-      <input class="bsl" type="range" min="0" max="200" step="5"
-        value="${S.budgets[cat.k]}" style="accent-color:${cat.c}"
-        oninput="setBud('${cat.k}',+this.value)" ${locked?'disabled':''}>
-    </div>`).join('');
+        </div></div>
+      <input class="bsl" type="range" min="0" max="200" step="5" value="${S.budgets[cat.k]}" style="accent-color:${cat.c}" oninput="setBud('${cat.k}',+this.value)" ${locked?'disabled':''}></div>`).join('');
   refreshBudTotal();
 }
-function adjBud(k,d){
-  if(S.tripActive)return;
-  S.budgets[k]=Math.max(0,S.budgets[k]+d);
-  document.getElementById('bv-'+k).textContent=fmt(S.budgets[k]);
-  document.querySelector(`[oninput*="'${k}'"]`).value=S.budgets[k];
-  refreshBudTotal();save();
-}
-function setBud(k,v){
-  if(S.tripActive)return;
-  S.budgets[k]=v;document.getElementById('bv-'+k).textContent=fmt(v);
-  refreshBudTotal();save();
-}
+function adjBud(k,d){if(S.tripActive)return;S.budgets[k]=Math.max(0,S.budgets[k]+d);document.getElementById('bv-'+k).textContent=fmt(S.budgets[k]);document.querySelector(`[oninput*="'${k}'"]`).value=S.budgets[k];refreshBudTotal();save();}
+function setBud(k,v){if(S.tripActive)return;S.budgets[k]=v;document.getElementById('bv-'+k).textContent=fmt(v);refreshBudTotal();save();}
 function refreshBudTotal(){document.getElementById('bud-total').textContent=fmt(Object.values(S.budgets).reduce((s,v)=>s+v,0));}
 
-// ═══════════════════════════════════════════════
-// HISTORY
-// ═══════════════════════════════════════════════
-let _mChart=null,_dChart=null;
-function renderHistory(){
-  const trips=S.trips.slice().reverse();
-  const le=document.getElementById('hist-list'),ee=document.getElementById('hist-empty'),ch=document.getElementById('hist-charts');
-  if(!trips.length){le.innerHTML='';ee.style.display='block';ch.style.display='none';return;}
-  ee.style.display='none';ch.style.display='block';
-  document.getElementById('hist-ct').textContent=trips.length+' trip'+(trips.length!==1?'s':'');
+// ══════════════════════════════════════════
+// HISTORY / STATS
+// ══════════════════════════════════════════
+let _mChart=null,_dChart=null,_activeCat='all';
 
-  // Monthly bar chart (12 months)
+// ─── MONTHLY CHART HELPERS ───────────────────
+function buildMonthData(catKey){
   const now=new Date();
-  const months=Array.from({length:12},(_,i)=>{
+  return Array.from({length:12},(_,i)=>{
     const d=new Date(now.getFullYear(),now.getMonth()-(11-i),1);
-    return{label:d.toLocaleDateString('en-US',{month:'short'}),y:d.getFullYear(),m:d.getMonth(),actual:0,planned:0};
+    return{label:d.toLocaleDateString('en-US',{month:'short'}),y:d.getFullYear(),m:d.getMonth(),actual:0,budget:0};
+  }).map(mo=>{
+    S.trips.forEach(t=>{
+      const td=new Date(t.date);
+      if(td.getFullYear()!==mo.y||td.getMonth()!==mo.m)return;
+      const locked=t.lockedBudgets||DEF_BUD;
+      if(catKey==='all'){
+        mo.actual+=t.actual;
+        mo.budget+=Object.values(locked).reduce((s,v)=>s+v,0);
+      } else {
+        t.items.forEach(i=>{if(i.cat===catKey)mo.actual+=i.actualPrice*i.qty;});
+        mo.budget+=locked[catKey]||0;
+      }
+    });
+    mo.actual=+mo.actual.toFixed(2);
+    mo.budget=+mo.budget.toFixed(2);
+    return mo;
   });
-  S.trips.forEach(t=>{
-    const d=new Date(t.date);
-    months.forEach(mo=>{if(d.getFullYear()===mo.y&&d.getMonth()===mo.m){mo.actual+=t.actual;mo.planned+=t.planned;}});
-  });
+}
+
+function barColor(actual,budget){
+  if(!budget||!actual)return{bg:'rgba(24,149,106,0.2)',border:'#18956a'};
+  const p=actual/budget;
+  if(p>=1)   return{bg:'rgba(208,48,48,0.25)', border:'#d03030'};
+  if(p>=0.8) return{bg:'rgba(201,124,16,0.25)',border:'#c97c10'};
+  return      {bg:'rgba(24,149,106,0.25)',      border:'#18956a'};
+}
+
+function drawMonthlyChart(catKey){
+  const months=buildMonthData(catKey);
+  const colors=months.map(m=>barColor(m.actual,m.budget));
   if(_mChart)_mChart.destroy();
   _mChart=new Chart(document.getElementById('chart-monthly'),{
     type:'bar',
     data:{
       labels:months.map(m=>m.label),
       datasets:[
-        {label:'Actual',data:months.map(m=>+m.actual.toFixed(2)),backgroundColor:'rgba(24,149,106,0.25)',borderColor:'#18956a',borderWidth:2,borderRadius:5,borderSkipped:false},
-        {label:'Planned',data:months.map(m=>+m.planned.toFixed(2)),backgroundColor:'rgba(24,149,106,0.05)',borderColor:'#9ed4b8',borderWidth:1.5,borderRadius:5,borderSkipped:false,borderDash:[4,3]}
+        {
+          label:'Actual',
+          data:months.map(m=>m.actual),
+          backgroundColor:colors.map(c=>c.bg),
+          borderColor:colors.map(c=>c.border),
+          borderWidth:2,borderRadius:[5,5,0,0],borderSkipped:false,
+          categoryPercentage:0.7,barPercentage:0.5,
+          order:1
+        },
+        {
+          label:'Budget',
+          data:months.map(m=>m.budget),
+          backgroundColor:'rgba(134,168,153,0.15)',
+          borderColor:'rgba(134,168,153,0.6)',
+          borderWidth:2,borderRadius:[5,5,0,0],borderSkipped:false,
+          categoryPercentage:0.7,barPercentage:0.5,
+          order:2
+        }
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:true,position:'bottom',labels:{color:'#86a899',font:{size:11},boxWidth:12,padding:12}},
-               tooltip:{callbacks:{label:ctx=>' '+ctx.dataset.label+': '+fmt(ctx.raw)}}},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{
+            label:ctx=>{
+              const v=ctx.raw;
+              if(!v&&v!==0)return'';
+              const lbl=ctx.dataset.label;
+              const mo=months[ctx.dataIndex];
+              if(lbl==='Actual'&&mo.budget>0){
+                const pct=Math.round(v/mo.budget*100);
+                return` Actual: ${fmt(v)} (${pct}% of budget)`;
+              }
+              return` Budget: ${fmt(v)}`;
+            }
+          }
+        }
+      },
       scales:{
         x:{grid:{display:false},ticks:{color:'#86a899',font:{size:11}}},
-        y:{grid:{color:'#e8f0ec'},border:{dash:[3,3]},ticks:{color:'#86a899',font:{size:11},callback:v=>'$'+v}}
+        y:{grid:{color:'#e8f0ec'},border:{dash:[3,3]},ticks:{color:'#86a899',font:{size:11},callback:v=>'$'+v},min:0}
       }
     }
   });
+}
 
-  // Donut — this year
-  const thisYear=now.getFullYear();
-  const yearTrips=S.trips.filter(t=>new Date(t.date).getFullYear()===thisYear);
-  const byCat={};
-  yearTrips.forEach(t=>t.items.forEach(i=>{byCat[i.cat]=(byCat[i.cat]||0)+i.actualPrice*i.qty;}));
-  const entries=Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
-  const catCols={produce:'#18956a',dairy:'#0d7a6a',meat:'#c03030',bakery:'#b86010',frozen:'#1080b0',snacks:'#e07010',beverages:'#6040a0',household:'#107090',other:'#507060'};
-
-  if(_dChart)_dChart.destroy();
-  _dChart=new Chart(document.getElementById('chart-donut'),{
-    type:'doughnut',
-    data:{
-      labels:entries.map(([k])=>{const c=CATS.find(x=>x.k===k);return c?c.n:k;}),
-      datasets:[{data:entries.map(([,v])=>+v.toFixed(2)),backgroundColor:entries.map(([k])=>catCols[k]||'#507060'),borderWidth:2,borderColor:'#fff',hoverOffset:5}]
-    },
-    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmt(ctx.raw)}}}}
+function buildCatTabs(){
+  const used=new Set();
+  S.trips.forEach(t=>t.items.forEach(i=>used.add(i.cat)));
+  // Clone to remove old listeners
+  const oldTabs=document.getElementById('cat-tabs');
+  const newTabs=oldTabs.cloneNode(false);
+  oldTabs.parentNode.replaceChild(newTabs,oldTabs);
+  newTabs.innerHTML=`<button class="cat-tab${_activeCat==='all'?' on':''}" data-cat="all">All</button>`
+    +CATS.filter(cat=>used.has(cat.k)).map(cat=>`<button class="cat-tab${_activeCat===cat.k?' on':''}" data-cat="${cat.k}">${cat.e} ${cat.n}</button>`).join('');
+  newTabs.addEventListener('click',e=>{
+    const btn=e.target.closest('.cat-tab');if(!btn)return;
+    _activeCat=btn.dataset.cat;
+    newTabs.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    const cat=CATS.find(cat=>cat.k===_activeCat);
+    document.getElementById('monthly-chart-title').textContent=
+      _activeCat==='all'?'Monthly Spend':(cat?cat.e+' '+cat.n+' Monthly':'Monthly');
+    drawMonthlyChart(_activeCat);
   });
+}
 
+function renderHistory(){
+  const trips=S.trips.slice().reverse();
+  const le=document.getElementById('hist-list'),ee=document.getElementById('hist-empty'),ch=document.getElementById('hist-charts');
+  const bs=document.getElementById('badges-section');
+  if(S.trips.length){
+    bs.style.display='block';
+    document.getElementById('badges-row').innerHTML=BADGE_DEFS.map(b=>`<div class="badge${S.earnedBadges.includes(b.id)?' earned':' locked'}"><div class="badge-ico">${b.ico}</div><div class="badge-name">${b.name}</div></div>`).join('');
+  }else bs.style.display='none';
+  if(!trips.length){le.innerHTML='';ee.style.display='block';ch.style.display='none';return;}
+  ee.style.display='none';ch.style.display='block';
+  document.getElementById('hist-ct').textContent=trips.length+' trip'+(trips.length!==1?'s':'');
+  // Build tabs and draw chart
+  _activeCat='all';
+  buildCatTabs();
+  document.getElementById('monthly-chart-title').textContent='Monthly Spend';
+  drawMonthlyChart('all');
+  // Donut
+  const now=new Date();
+  const yr=now.getFullYear();
+  const yrT=S.trips.filter(t=>new Date(t.date).getFullYear()===yr);
+  const byCat={};yrT.forEach(t=>t.items.forEach(i=>{byCat[i.cat]=(byCat[i.cat]||0)+i.actualPrice*i.qty;}));
+  const entries=Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
+  if(_dChart)_dChart.destroy();
+  _dChart=new Chart(document.getElementById('chart-donut'),{type:'doughnut',
+    data:{labels:entries.map(([k])=>{const c=CATS.find(x=>x.k===k);return c?c.n:k;}),
+      datasets:[{data:entries.map(([,v])=>+v.toFixed(2)),backgroundColor:entries.map(([k])=>CAT_COLS[k]||'#507060'),borderWidth:2,borderColor:'#fff',hoverOffset:5}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmt(ctx.raw)}}}}});
   const yrTotal=entries.reduce((s,[,v])=>s+v,0);
-  document.getElementById('donut-legend').innerHTML=entries.map(([k,v])=>{
-    const cat=CATS.find(x=>x.k===k);
-    return`<div style="display:flex;align-items:center;gap:7px">
-      <div style="width:9px;height:9px;border-radius:50%;background:${catCols[k]||'#507060'};flex-shrink:0"></div>
-      <span style="font-size:12px;color:var(--ink2);flex:1">${cat?cat.e+' '+cat.n:k}</span>
-      <span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:var(--ink)">${yrTotal>0?Math.round(v/yrTotal*100):0}%</span>
-    </div>`;
-  }).join('');
-
+  document.getElementById('donut-legend').innerHTML=entries.map(([k,v])=>{const cat=CATS.find(x=>x.k===k);return`<div style="display:flex;align-items:center;gap:7px"><div style="width:9px;height:9px;border-radius:50%;background:${CAT_COLS[k]||'#507060'};flex-shrink:0"></div><span style="font-size:12px;color:var(--ink2);flex:1">${cat?cat.e+' '+cat.n:k}</span><span style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:var(--ink)">${yrTotal>0?Math.round(v/yrTotal*100):0}%</span></div>`;}).join('');
+  // Price memory
+  const pm=getPriceMemory();
+  const pms=document.getElementById('price-memory-section'),pmg=document.getElementById('pm-gap');
+  if(pm.length){
+    pms.style.display='block';pmg.style.display='block';
+    document.getElementById('price-memory-list').innerHTML=pm.map(p=>`
+      <div class="pm-row">
+        <div><div style="font-size:14px;font-weight:600">${esc(p.name)}</div><div style="font-size:11px;color:var(--ink3);margin-top:2px">${p.count} purchases</div></div>
+        <div style="text-align:right">
+          <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:${p.pct>0?'var(--red)':'var(--green)'}">${p.pct>0?'▲':'▼'} ${Math.round(Math.abs(p.pct)*100)}%</div>
+          <div style="font-size:11px;color:var(--ink3);margin-top:2px">${fmt(p.first)} → ${fmt(p.last)}</div>
+        </div>
+      </div>`).join('');
+  }else{pms.style.display='none';pmg.style.display='none';}
   // Trip cards
   le.innerHTML=trips.map(t=>{
     const col=t.under?'var(--green)':'var(--red)';
     const pct=t.budget>0?Math.min(t.actual/t.budget,1):0;
-    const diff=t.actual-t.planned;
+    const sc=t.score||calcTripScore(t);const gr=scoreToGrade(sc);
     const byCat2={};t.items.forEach(i=>{byCat2[i.cat]=(byCat2[i.cat]||0)+i.actualPrice*i.qty;});
     const top=Object.entries(byCat2).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,v])=>{const c=CATS.find(x=>x.k===k);return`<span class="chip d">${c?c.e:'📦'} ${fmt(v)}</span>`;}).join('');
     return`<div class="tcard">
@@ -1135,8 +1337,7 @@ function renderHistory(){
         <div><div style="font-size:16px;font-weight:700">${esc(t.store)}</div><div style="font-size:12px;color:var(--ink3);margin-top:2px">${fmtDate(t.date)} &middot; ${t.items.length} items</div></div>
         <div style="text-align:right">
           <div style="font-family:'DM Mono',monospace;font-size:17px;color:${col}">${fmt(t.actual)}</div>
-          <div style="font-size:11px;color:var(--ink3);margin-top:1px">plan: ${fmt(t.planned)}</div>
-          <div style="font-size:11px;font-weight:700;color:${Math.abs(diff)<0.01?'var(--ink3)':diff>0?'var(--red)':'var(--green)'};margin-top:1px">${Math.abs(diff)<0.01?'on plan':diff>0?'+'+fmt(diff)+' over':fmt(Math.abs(diff))+' under plan'}</div>
+          <div style="display:inline-block;background:${gr.col}20;color:${gr.col};font-weight:800;font-size:12px;padding:2px 8px;border-radius:99px;margin-top:3px">${gr.letter}</div>
         </div>
       </div>
       <div class="bt" style="margin-bottom:8px"><div class="bf" style="width:${pct*100}%;background:${col}"></div></div>
@@ -1145,134 +1346,76 @@ function renderHistory(){
   }).join('');
 }
 
-// ═══════════════════════════════════════════════
+// ══════════════════════════════════════════
 // UTILS
-// ═══════════════════════════════════════════════
+// ══════════════════════════════════════════
 function fmt(n){return'$'+(+n||0).toFixed(2);}
 function fmtDate(iso){return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 let toastT;
-function toast(msg){
-  const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
-  clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2600);
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2600);}
+let _confCb=null;
+function showConfirm(title,body,onOk,okLbl='Confirm',danger=true){
+  document.getElementById('confirm-title').textContent=title;document.getElementById('confirm-body').textContent=body;
+  const ok=document.getElementById('confirm-ok-btn');ok.textContent=okLbl;ok.style.background=danger?'var(--red)':'var(--green)';
+  _confCb=onOk;document.getElementById('confirm-overlay').classList.add('open');
 }
+function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('open');_confCb=null;}
 
-// ═══════════════════════════════════════════════
-// CONFIRM DIALOG (replaces browser confirm())
-// ═══════════════════════════════════════════════
-let _confirmCallback = null;
-function showConfirm(title, body, onOk, okLabel='Confirm', danger=true) {
-  document.getElementById('confirm-title').textContent = title;
-  document.getElementById('confirm-body').textContent  = body;
-  const okBtn = document.getElementById('confirm-ok-btn');
-  okBtn.textContent = okLabel;
-  okBtn.style.background = danger ? 'var(--red)' : 'var(--green)';
-  _confirmCallback = onOk;
-  document.getElementById('confirm-overlay').classList.add('open');
-}
-function closeConfirm() {
-  document.getElementById('confirm-overlay').classList.remove('open');
-  _confirmCallback = null;
-}
-
-// ═══════════════════════════════════════════════
+// ══════════════════════════════════════════
 // INIT
-// ═══════════════════════════════════════════════
+// ══════════════════════════════════════════
 (function(){
   load();
-
-  // Category select
+  // Cat selects
   const sel=document.getElementById('f-cat');
   CATS.forEach(c=>{const o=document.createElement('option');o.value=c.k;o.textContent=c.e+' '+c.n;sel.appendChild(o);});
-
   // Confirm dialog
-  document.getElementById('confirm-ok-btn').addEventListener('click', function() {
-    closeConfirm();
-    if (_confirmCallback) _confirmCallback();
-  });
-  document.getElementById('confirm-cancel-btn').addEventListener('click', closeConfirm);
-  document.getElementById('confirm-overlay').addEventListener('click', e => {
-    if (e.target === document.getElementById('confirm-overlay')) closeConfirm();
-  });
-
+  document.getElementById('confirm-ok-btn').addEventListener('click',()=>{closeConfirm();if(_confCb)_confCb();});
+  document.getElementById('confirm-cancel-btn').addEventListener('click',closeConfirm);
+  document.getElementById('confirm-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('confirm-overlay'))closeConfirm();});
   // Nav
   document.getElementById('nb-home').addEventListener('click',()=>go('home'));
   document.getElementById('nb-list').addEventListener('click',()=>go('list'));
   document.getElementById('nb-budget').addEventListener('click',()=>go('budget'));
   document.getElementById('nb-history').addEventListener('click',()=>go('history'));
-
   // Landing
   document.getElementById('btn-new-trip').addEventListener('click',()=>startTrip('list'));
   document.getElementById('btn-go-budget').addEventListener('click',()=>go('budget'));
   document.getElementById('btn-history').addEventListener('click',()=>go('history'));
-
   // Store picker
-  document.getElementById('store-grid').addEventListener('click',e=>{
-    const btn=e.target.closest('[data-store]');
-    if(btn) confirmStore(btn.dataset.store);
-  });
+  document.getElementById('store-grid').addEventListener('click',e=>{const b=e.target.closest('[data-store]');if(b)confirmStore(b.dataset.store);});
   document.getElementById('store-go-btn').addEventListener('click',()=>confirmStore());
   document.getElementById('store-input').addEventListener('keydown',e=>{if(e.key==='Enter')confirmStore();});
   document.getElementById('store-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('store-overlay'))document.getElementById('store-overlay').classList.remove('open');});
-
-  // Home trip actions
-  document.getElementById('end-trip-btn').addEventListener('click',endTrip);
+  // Home
   document.getElementById('checkout-btn').addEventListener('click',openCheckout);
   document.getElementById('cart-add-btn').addEventListener('click',()=>openItemSheet('cart',null));
-
   // List
   document.getElementById('list-add-btn').addEventListener('click',()=>openItemSheet('list',null));
   document.getElementById('clear-done-btn').addEventListener('click',clearDone);
-
   // Item sheet
   document.getElementById('item-save-btn').addEventListener('click',saveItem);
   document.getElementById('item-cancel-btn').addEventListener('click',closeItemSheet);
   document.getElementById('item-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('item-overlay'))closeItemSheet();});
-  document.getElementById('f-price').addEventListener('input',updateHint);
-  document.getElementById('f-qty').addEventListener('input',updateHint);
-  document.getElementById('f-cat').addEventListener('change',updateHint);
-  document.getElementById('f-name').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('f-price').focus();});
-
-  // Price confirm sheet
-  document.getElementById('pconf-actual-input').addEventListener('input',updatePconfDelta);
-  document.getElementById('pconf-actual-input').addEventListener('keydown',e=>{if(e.key==='Enter')confirmActualPrice();});
+  document.getElementById('f-name').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('f-cat').focus();});
+  document.getElementById('f-name').addEventListener('input',()=>showItemHistHint(document.getElementById('f-name').value));
+  // Price confirm
+  document.getElementById('pconf-price').addEventListener('keydown',e=>{if(e.key==='Enter')confirmActualPrice();});
   document.getElementById('pconf-add-btn').addEventListener('click',confirmActualPrice);
   document.getElementById('pconf-cancel-btn').addEventListener('click',()=>document.getElementById('pconf-overlay').classList.remove('open'));
   document.getElementById('pconf-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('pconf-overlay'))document.getElementById('pconf-overlay').classList.remove('open');});
-
   // Checkout
   document.getElementById('co-complete-btn').addEventListener('click',completeTrip);
   document.getElementById('co-cancel-btn').addEventListener('click',closeCheckout);
   document.getElementById('co-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('co-overlay'))closeCheckout();});
-
-  // Override confirmStore to call _postStoreConfirm for routing
-  const _origConfirmStore = confirmStore;
-  // Patch: route after store confirmed
-  window._patchedConfirmStore = function(name){
-    const store=name||document.getElementById('store-input').value.trim();
-    if(!store)return;
-    document.getElementById('store-overlay').classList.remove('open');
-    S.tripActive=true; S.tripStore=store; S.cart=[];
-    S.lockedBudgets={...S.budgets};
-    S.list.forEach(i=>i.inCart=false);
-    save(); renderHome();
-    toast('Trip started at '+store+' — budget locked 🔒');
-    _postStoreConfirm();
-  };
-
-  // Rebind store buttons to use patched version
-  document.getElementById('store-go-btn').onclick = ()=>window._patchedConfirmStore();
-  document.getElementById('store-input').onkeydown = e=>{if(e.key==='Enter')window._patchedConfirmStore();};
-  document.getElementById('store-grid').onclick = e=>{
-    const btn=e.target.closest('[data-store]');
-    if(btn)window._patchedConfirmStore(btn.dataset.store);
-  };
-
-  // Bind delegated list events
+  // Recap
+  document.getElementById('recap-done-btn').addEventListener('click',()=>{document.getElementById('recap-overlay').classList.remove('open');go('home');});
+  // List events
   bindListEvents();
-
-  // Initial render
+  // Render
   renderHome();
+  if(!S.onboardingDone)startOnboarding();
 })();
 </script>
 </body>
